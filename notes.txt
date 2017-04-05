@@ -1,0 +1,27 @@
+mysql -u 111 -p movietheater
+
+use movietheater;
+DROP TABLE Event_airDates, Auditorium_vipSeats, Event_Auditorium, User_Ticket, hibernate_sequence, Ticket, User, Event, Auditorium, Counter;
+
+use movietheater;
+select * from Auditorium;
+select * from User;
+select * from Event;
+select * from Ticket;
+select * from Event_Auditorium;
+
+select * from Auditorium where name='Galeria';
+select * from User where firstName='Dima';
+select * from Event where name='Mud';
+select * from Ticket where ;
+
+delete from Auditorium_vipSeats;
+delete from Event_Auditorium;
+delete from User_Ticket;
+delete from Event_airDates;
+delete from Auditorium;
+delete from Ticket;
+delete from User;
+delete from Counter;
+delete from Event;
+delete from hibernate_sequence;
