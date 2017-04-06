@@ -12,7 +12,7 @@
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>  <!-- where JSP's are situated -->
-        <property name="suffix" value=".html"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
