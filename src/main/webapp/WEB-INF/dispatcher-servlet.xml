@@ -10,9 +10,29 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="ua.epam.spring.hometask.mvc.controllers"/>
 
+    <!-- JSP/JSTL view resolver -->
+    <!--  view: "hello" -> /WEB-INF/pages/hello.jsp  -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- JSTL view support -->
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/views/"/>  <!-- where JSP's are situated -->
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--<bean id="velocityViewResolver"-->
+          <!--class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">-->
+        <!--<property name="cache" value="true"/>-->
+        <!--<property name="prefix" value=""/>-->
+        <!--<property name="suffix" value=".vm"/>-->
+    <!--</bean>-->
+    <!--<bean id="velocityConfig"-->
+          <!--class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">-->
+        <!--<property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>-->
+    <!--</bean>-->
+
+    <bean id="resourceBundleViewResolver"
+          class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+        <property name="basename" value="views"/>
     </bean>
 
     <mvc:resources location="/resources/" mapping="/resources/**"/>
