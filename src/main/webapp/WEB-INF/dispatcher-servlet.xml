@@ -33,6 +33,10 @@
         <property name="basename" value="views"/>
     </bean>
 
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </bean>
+
     <mvc:resources location="/resources/" mapping="/resources/**"/>
     <mvc:resources mapping="/favicon.ico" location="/resources/icons/favicon.ico" />
 

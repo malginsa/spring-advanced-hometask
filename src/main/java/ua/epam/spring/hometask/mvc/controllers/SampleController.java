@@ -2,8 +2,12 @@ package ua.epam.spring.hometask.mvc.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 
 @Controller
 public class SampleController {
@@ -19,6 +23,18 @@ public class SampleController {
 
     @RequestMapping("/exception")
     public ModelAndView invokeException() throws Exception {
-        throw new Exception("Test exception");
+        throw new Exception("Sample exception");
+    }
+
+
+    @RequestMapping(value = "/form", method = RequestMethod.POST)
+    public String handleFormUpload(@RequestParam String name,
+                                   @RequestParam MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            byte[] bytes = file.getBytes();
+            // store the bytes somewhere
+            return "redirect:uploadSuccess";
+        }
+        return "redirect:uploadFailure";
     }
 }
