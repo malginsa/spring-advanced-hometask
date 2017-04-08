@@ -10,6 +10,15 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="ua.epam.spring.hometask.mvc.controllers"/>
 
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+    </bean>
+    <bean id="freemarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl"/>
+    </bean>
+
     <!-- JSP/JSTL view resolver -->
     <!--  view: "hello" -> /WEB-INF/pages/hello.jsp  -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -19,17 +28,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--<bean id="velocityViewResolver"-->
-          <!--class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">-->
-        <!--<property name="cache" value="true"/>-->
-        <!--<property name="prefix" value=""/>-->
-        <!--<property name="suffix" value=".vm"/>-->
-    <!--</bean>-->
-    <!--<bean id="velocityConfig"-->
-          <!--class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">-->
-        <!--<property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>-->
-    <!--</bean>-->
-
     <bean id="resourceBundleViewResolver"
           class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
         <property name="basename" value="views"/>
@@ -37,5 +35,16 @@
 
     <mvc:resources location="/resources/" mapping="/resources/**"/>
     <mvc:resources mapping="/favicon.ico" location="/resources/icons/favicon.ico" />
+
+    <!--<bean id="velocityViewResolver"-->
+    <!--class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">-->
+    <!--<property name="cache" value="true"/>-->
+    <!--<property name="prefix" value=""/>-->
+    <!--<property name="suffix" value=".vm"/>-->
+    <!--</bean>-->
+    <!--<bean id="velocityConfig"-->
+    <!--class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">-->
+    <!--<property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>-->
+    <!--</bean>-->
 
 </beans>

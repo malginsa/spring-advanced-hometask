@@ -17,9 +17,9 @@ public class GeneralExceptionController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ModelAndView onServerException(Exception e) {
         LOG.error("Internal server error while processing request", e);
-        ModelAndView mav = new ModelAndView("exception");
-        mav.addObject("message", HttpStatus.INTERNAL_SERVER_ERROR.toString()
-                                 + "\n" + e.getMessage());
+        ModelAndView mav = new ModelAndView("simplePage");
+        mav.addObject("title", "Something went wrong");
+        mav.addObject("message", e.getMessage());
         return mav;
     }
 }
