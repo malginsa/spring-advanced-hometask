@@ -7,18 +7,18 @@
 
   <display-name>spring-advanced-hometask</display-name>
 
-    <!--общий контекст для всех диспетчеров-->
-	<!--<listener>-->
-		<!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-	<!--</listener>-->
-	<!--<context-param>-->
-		<!--<param-name>contextConfigLocation</param-name>-->
-		<!--<param-value>/WEB-INF/spring/applicationContext.xml</param-value>-->
-	<!--</context-param>-->
+    <!-- general context for all dispatchers -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/generalApplicationContext.xml</param-value>
+	</context-param>
 
-    <!--диспетчеров может быть несколько-->
 	<servlet>
 
+		<!-- There are can be not only one dispatcher-->
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>

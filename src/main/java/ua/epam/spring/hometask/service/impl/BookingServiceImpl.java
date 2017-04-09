@@ -3,6 +3,7 @@ package ua.epam.spring.hometask.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import ua.epam.spring.hometask.dao.EventServiceDao;
 import ua.epam.spring.hometask.dao.UserServiceDao;
 import ua.epam.spring.hometask.domain.*;
 import ua.epam.spring.hometask.service.BookingService;
@@ -23,8 +24,8 @@ public class BookingServiceImpl implements BookingService {
     /** price for HIGH rated event costs more than ordinary in how many */
     public static final double HIGH_RATED_FACTOR = 1.2;
 
-    DiscountService discountService;
-    UserServiceDao userServiceDao;
+    private DiscountService discountService;
+    private UserServiceDao userServiceDao;
 
     @Autowired
     public BookingServiceImpl(

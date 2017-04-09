@@ -12,7 +12,7 @@ import ua.epam.spring.hometask.domain.User;
 
 import java.time.LocalDateTime;
 
-@Aspect
+//@Aspect
 @Component("discountAspect")
 public class DiscountAspect {
 

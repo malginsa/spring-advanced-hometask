@@ -13,7 +13,7 @@ public class HibernateUtil {
     private static final Logger LOG = Logger.getLogger(HibernateUtil.class);
 
     private static final EntityManagerFactory jPAsessionFactory =
-            Persistence.createEntityManagerFactory("h2Unit");
+            Persistence.createEntityManagerFactory("mysqlUnit");
 
     public static EntityManager getEntityManager() {
         return jPAsessionFactory.createEntityManager();

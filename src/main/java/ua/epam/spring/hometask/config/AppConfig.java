@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import ua.epam.spring.hometask.dao.AuditoriumServiceDao;
 import ua.epam.spring.hometask.dao.persistent.AuditoriumServicePersistentDao;
+import ua.epam.spring.hometask.dao.simple.AuditoriumServiceSimpleDao;
 import ua.epam.spring.hometask.domain.Auditorium;
 
 import javax.annotation.Resource;
@@ -88,6 +89,7 @@ public class AppConfig {
     @Bean
     @Autowired
     public AuditoriumServiceDao auditoriumServiceDao() {
-        return new AuditoriumServicePersistentDao(auditoriums());
+//        return new AuditoriumServicePersistentDao(auditoriums());
+        return new AuditoriumServiceSimpleDao(auditoriums());
     }
 }

@@ -25,6 +25,9 @@ public class AuditoriumServiceSimpleDao implements AuditoriumServiceDao {
 
     @Override
     public Auditorium save(Auditorium auditorium) {
+        if (getByName(auditorium.getName()).isPresent()) {
+            return auditorium;
+        }
         auditorium.setId(counter.incrementAndGet());
         storage.add(auditorium);
         return auditorium;

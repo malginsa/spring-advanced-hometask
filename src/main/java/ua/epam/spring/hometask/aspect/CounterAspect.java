@@ -15,7 +15,7 @@ import ua.epam.spring.hometask.domain.Ticket;
 
 import java.util.Set;
 
-@Aspect
+//@Aspect
 @Component("counterAspect")
 public class CounterAspect {
 
