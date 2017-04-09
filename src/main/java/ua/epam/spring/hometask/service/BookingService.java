@@ -26,7 +26,9 @@ public interface BookingService {
      * @param seats    Set of seat numbers that user wants to buy
      * @return total price
      */
-    public double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user,
+    public double getTicketsPrice(@Nonnull Event event,
+                                  @Nonnull LocalDateTime dateTime,
+                                  @Nullable User user,
                                   @Nonnull Set<Long> seats);
 
     /**
@@ -46,6 +48,7 @@ public interface BookingService {
      */
     public
     @Nonnull
-    Set<Ticket> getPurchasedTicketsForEvent(@Nonnull Event event, @Nonnull LocalDateTime dateTime);
+    Set<Ticket> getPurchasedTicketsForEvent(@Nonnull Event event,
+                                            @Nonnull LocalDateTime dateTime);
 
 }

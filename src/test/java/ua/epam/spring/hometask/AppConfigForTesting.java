@@ -20,9 +20,16 @@ public class AppConfigForTesting {
         user.setLastName("Polo");
         user.setEmail("Marko_Polo@gmail.com");
         user.setBithday(LocalDate.of(1254, 9, 15));
-//        if (null == user.getId()) {
-//            user.setId(8520730L);
-//        }
+        return user;
+    }
+
+    @Bean
+    public User giordano() {
+        User user = new User();
+        user.setFirstName("Giordano");
+        user.setLastName("Bruno");
+        user.setEmail("Giordano_Bruno@gmail.com");
+        user.setBithday(LocalDate.of(1548, 1, 1));
         return user;
     }
 
@@ -59,10 +66,6 @@ public class AppConfigForTesting {
         event.setName("JPoint");
         event.setBasePrice(19d);
         event.setRating(EventRating.HIGH);
-        // TODO
-//        if (null == event.getId()) {
-//            event.setId(383695739L);
-//        }
         return event;
     }
 
@@ -72,10 +75,6 @@ public class AppConfigForTesting {
         event.setName("Millenium");
         event.setBasePrice(10d);
         event.setRating(EventRating.MID);
-        // TODO
-//        if (null == event.getId()) {
-//            event.setId(9752569L);
-//        }
         return event;
     }
 }

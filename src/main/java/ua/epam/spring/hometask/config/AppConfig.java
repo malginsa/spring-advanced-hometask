@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @EnableAspectJAutoProxy
 @Import({
 //        CounterAspect.class,      // TODO aspect prevent JPA facility
-//        DiscountAspect.class,     // aspect prevent JPA facility
+//        DiscountAspect.class,
 //        LuckyWinnerAspect.class,
         SimpleDaoConfig.class     // uses in-memory structures
 //        PersistentDaoConfig.class,  // uses persistent DB
@@ -49,15 +49,6 @@ public class AppConfig {
 
     @Resource(name = "auditoriumPropsBean")
     private Map<String, String> auditoriumProps;
-
-    @Bean
-    public Auditorium fakeAuditorium() {
-        return new Auditorium("Fake", 44,
-                new HashSet<Long>() {{
-                    add(1L);
-                    add(2L);
-                }});
-    }
 
     @Bean(name = "auditoriums")
     public List<Auditorium> auditoriums() {
@@ -96,13 +87,7 @@ public class AppConfig {
 
     @Bean
     @Autowired
-    public AuditoriumServiceDao auditoriumServiceDao(
-//            @Qualifier
-//            List<Auditorium> audsList
-    ) {
-//        System.out.println();
-//        audsList.stream().forEach(System.out::println);
-//        System.out.println();
+    public AuditoriumServiceDao auditoriumServiceDao() {
         return new AuditoriumServicePersistentDao(auditoriums());
     }
 }
