@@ -14,9 +14,8 @@ import ua.epam.spring.hometask.service.UserService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/book")
@@ -36,7 +35,7 @@ public class BookingController {
 
     // sample: http://localhost:8080/book/getTickets?eventName=Mud&localDateTime=2017-01-11.18:00
     @RequestMapping("/getTickets")
-    public ModelAndView getTickets(
+    public ModelAndView getTickets (
             @RequestParam String eventName,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm") LocalDateTime localDateTime)
             throws Exception {
@@ -52,8 +51,41 @@ public class BookingController {
             mav = new ModelAndView("tickets");
             mav.addObject("tickets", tickets);
         } else {
-            mav = new ModelAndView("noTickets");
+            mav = new ModelAndView("simplePage");
+            mav.addObject("title", "No booked tickets");
+            mav.addObject("message", "");
         }
+        return mav;
+    }
+
+    // sample: http://localhost:8080/book/doBookTickets?userName=Timothy&eventName=Mud&localDateTime=2017-01-11.18:00&seat[]=7&seat[]=8
+    @RequestMapping("/doBookTickets")
+    public ModelAndView doBookTickets (
+            @RequestParam Long userId,
+            @RequestParam String eventName,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm") LocalDateTime localDateTime,
+            @RequestParam("seat[]") Long[] seats ) throws Exception {
+
+        User user = userService.getById(userId);
+        if (null == user) {
+            throw new Exception("Non-existing event");
+        }
+        Optional<Event> eventOptional = eventService.getByName(eventName);
+        if (!eventOptional.isPresent()) {
+            throw new Exception("Non-existing event");
+        }
+        Event event = eventOptional.get();
+        Set<Ticket> tickets = Arrays.stream(seats)
+                .map(s -> (new Ticket())
+                        .setUser(user)
+                        .setEvent(event)
+                        .setDateTime(localDateTime)
+                        .setSeat(s))
+                .collect(Collectors.toSet());
+        bookingService.bookTickets(tickets);
+        ModelAndView mav = new ModelAndView("simplePage");
+        mav.addObject("title", "Tickets are successfully booked");
+        mav.addObject("message", "");
         return mav;
     }
 
