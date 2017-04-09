@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 //        CounterAspect.class,      // TODO aspect prevent JPA facility
 //        DiscountAspect.class,     // aspect prevent JPA facility
 //        LuckyWinnerAspect.class,
-//        SimpleDaoConfig.class     // uses in-memory structures
-        PersistentDaoConfig.class,  // uses persistent DB
+        SimpleDaoConfig.class     // uses in-memory structures
+//        PersistentDaoConfig.class,  // uses persistent DB
 })
 public class AppConfig {
 

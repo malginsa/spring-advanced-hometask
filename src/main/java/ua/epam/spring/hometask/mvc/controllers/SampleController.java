@@ -26,15 +26,15 @@ public class SampleController {
         throw new Exception("Sample exception");
     }
 
-
-    @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String handleFormUpload(@RequestParam String name,
-                                   @RequestParam MultipartFile file) throws IOException {
-        if (!file.isEmpty()) {
-            byte[] bytes = file.getBytes();
-            // store the bytes somewhere
-            return "redirect:uploadSuccess";
-        }
-        return "redirect:uploadFailure";
-    }
+    // TODO sample from lecture
+//    @RequestMapping(value = "/form", method = RequestMethod.POST)
+//    public String handleFormUpload(@RequestParam String name,
+//                                   @RequestParam MultipartFile file) throws IOException {
+//        if (!file.isEmpty()) {
+//            byte[] bytes = file.getBytes();
+//            // store the bytes somewhere
+//            return "redirect:uploadSuccess";
+//        }
+//        return "redirect:uploadFailure";
+//    }
 }
