@@ -32,6 +32,7 @@
         <jetty-maven-plugin.version>9.3.7.v20160115</jetty-maven-plugin.version>
         <freemarker.version>2.3.23</freemarker.version>
         <itex.version>2.1.7</itex.version>
+        <opencsv.version>2.3</opencsv.version>
     </properties>
 
     <build>
@@ -265,6 +266,12 @@
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
             <version>${itex.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>${opencsv.version}</version>
         </dependency>
 
     </dependencies>

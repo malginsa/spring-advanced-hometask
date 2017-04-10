@@ -101,9 +101,8 @@ public class BookingController {
         return mav;
     }
 
-    // It returns result as PDF document
-//    @RequestMapping(value = "/getTicketsInPdf", headers="Accept=application/pdf")
-    @RequestMapping(value = "/getTicketsInPdf")
+    // It returns the same result as above method except only in PDF document
+    @RequestMapping(value = "/getTicketsInPdf", headers="Accept=application/pdf")
     public ModelAndView getTicketsInPdf(
             @ModelAttribute("model") ModelMap model,
             @RequestParam String eventName,
