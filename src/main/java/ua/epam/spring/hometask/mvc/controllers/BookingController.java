@@ -71,7 +71,7 @@ public class BookingController {
 
         User user = userService.getById(userId);
         if (null == user) {
-            throw new Exception("Non-existing event");
+            throw new Exception("Non-existing user Id");
         }
         Optional<Event> eventOptional = eventService.getByName(eventName);
         if (!eventOptional.isPresent()) {
@@ -109,5 +109,11 @@ public class BookingController {
                 .setEmail("budd@eecs.oregonstate.edu")
                 .setBithday(LocalDate.of(1955, 3, 15));
         timothy = userService.save(timothy);
+        User timothy2 = new User()
+                .setFirstName("Timothy")
+                .setLastName("The Second")
+                .setEmail("budd@eecs.oregonstate.edu")
+                .setBithday(LocalDate.of(1999, 9, 19));
+        timothy2 = userService.save(timothy2);
     }
 }
