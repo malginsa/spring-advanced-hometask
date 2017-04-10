@@ -50,6 +50,10 @@ public class BookingController {
         ModelAndView mav;
         if (tickets.size() > 0) {
             mav = new ModelAndView("tickets");
+            Ticket ticket = tickets.iterator().next();
+            mav.addObject("userName", ticket.getUser().getFirstName());
+            mav.addObject("eventName", ticket.getEvent().getName());
+            mav.addObject("localDateTime", ticket.getDateTime().toString());
             mav.addObject("tickets", tickets);
         } else {
             mav = new ModelAndView("simplePage");

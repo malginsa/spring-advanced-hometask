@@ -4,7 +4,7 @@
 </title>
 <head>
     <h3>
-        List of tickets
+        List of tickets of ${userName} for ${eventName} on ${localDateTime}
     </h3>
 </head>
 <body>
