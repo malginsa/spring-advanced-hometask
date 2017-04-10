@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Collection<User> getUsersByName(@Nonnull String firstName) {
+        return dao.getUsersByName(firstName);
+    }
+
+    @Override
     public User save(@Nonnull User user) {
         return dao.save(user);
     }

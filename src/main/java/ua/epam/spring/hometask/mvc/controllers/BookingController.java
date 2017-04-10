@@ -37,9 +37,10 @@ public class BookingController {
     @RequestMapping("/getTickets")
     public ModelAndView getTickets (
             @RequestParam String eventName,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm") LocalDateTime localDateTime)
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm")
+                    LocalDateTime localDateTime)
             throws Exception {
-        populateTestData();
+        populateTestDataForMVC();
         Optional<Event> eventOptional = eventService.getByName(eventName);
         if (!eventOptional.isPresent()) {
             throw new Exception("Non-existing event");
@@ -58,13 +59,15 @@ public class BookingController {
         return mav;
     }
 
-    // sample: http://localhost:8080/book/doBookTickets?userName=Timothy&eventName=Mud&localDateTime=2017-01-11.18:00&seat[]=7&seat[]=8
+    // sample: http://localhost:8080/book/doBookTickets?userId=1&eventName=Mud&localDateTime=2017-01-11.18:00&seat[]=7&seat[]=8
     @RequestMapping("/doBookTickets")
     public ModelAndView doBookTickets (
             @RequestParam Long userId,
             @RequestParam String eventName,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm") LocalDateTime localDateTime,
-            @RequestParam("seat[]") Long[] seats ) throws Exception {
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm")
+                    LocalDateTime localDateTime,
+            @RequestParam("seat[]") Long[] seats )
+            throws Exception {
 
         User user = userService.getById(userId);
         if (null == user) {
@@ -89,17 +92,16 @@ public class BookingController {
         return mav;
     }
 
+    // tests data for SpringMVC facility
     // TODO delete before releasing
-    private void populateTestData() {
-        Auditorium galeria = new Auditorium( "Galeria", 77,
-                new HashSet<Long>() {{
-                    add(3L);
-                }});
-        auditoriumService.add(galeria);
+    private void populateTestDataForMVC() {
         Event mud = (new Event())
                 .setName("Mud")
                 .setRating(EventRating.MID)
                 .setBasePrice(17.50);
+        mud.addAirDateTime(
+                LocalDateTime.of(2017, 1, 11, 18, 0),
+                auditoriumService.getByName("Aurora").get());
         mud = eventService.save(mud);
         User timothy = new User()
                 .setFirstName("Timothy")
@@ -107,14 +109,5 @@ public class BookingController {
                 .setEmail("budd@eecs.oregonstate.edu")
                 .setBithday(LocalDate.of(1955, 3, 15));
         timothy = userService.save(timothy);
-
-        LocalDateTime dt = LocalDateTime.of(2017, 1, 11, 18, 0);
-        mud.addAirDateTime(dt, galeria);
-        Ticket ticket = (new Ticket())
-                .setUser(timothy)
-                .setEvent(mud)
-                .setDateTime(dt)
-                .setSeat(2);
-        bookingService.bookTickets(new HashSet<Ticket>(){{add(ticket);}});
     }
 }

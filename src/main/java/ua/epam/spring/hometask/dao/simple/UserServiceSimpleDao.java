@@ -73,4 +73,11 @@ public class UserServiceSimpleDao implements UserServiceDao{
                 .filter(t -> (t.getEvent().equals(event)) && (t.getDateTime().equals(dateTime)))
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public Collection<User> getUsersByName(String firstName) {
+        return storage.stream()
+                .filter(u -> u.getFirstName().equals(firstName))
+                .collect(Collectors.toList());
+    }
 }

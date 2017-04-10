@@ -23,4 +23,6 @@ public interface UserServiceDao {
     Long getUsersCount();
 
     Set<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime);
+
+    Collection<User> getUsersByName(String firstName);
 }

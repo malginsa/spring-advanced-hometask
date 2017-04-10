@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 
+// It's a sample controller
+// TODO delete before releasing
 @Controller
 public class SampleController {
 

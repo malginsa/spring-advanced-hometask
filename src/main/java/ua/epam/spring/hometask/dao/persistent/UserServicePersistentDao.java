@@ -110,4 +110,17 @@ public class UserServicePersistentDao implements UserServiceDao {
         manager.close();
         return tickets;
     }
+
+    @Override
+    public Collection<User> getUsersByName(String firstName) {
+        EntityManager manager = HibernateUtil.getEntityManager();
+        List<User> resultList = manager.createQuery(
+                "select u from User u " +
+                        "where u.firstName = :firstName",
+                User.class)
+                .setParameter("firstName", firstName)
+                .getResultList();
+        manager.close();
+        return resultList;
+    }
 }
