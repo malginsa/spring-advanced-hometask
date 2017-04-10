@@ -31,6 +31,7 @@
         <mysql-connector-java.version>5.1.41</mysql-connector-java.version>
         <jetty-maven-plugin.version>9.3.7.v20160115</jetty-maven-plugin.version>
         <freemarker.version>2.3.23</freemarker.version>
+        <itex.version>2.1.7</itex.version>
     </properties>
 
     <build>
@@ -259,6 +260,13 @@
             <artifactId>jsr305</artifactId>
             <version>${findbugs.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>${itex.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>
