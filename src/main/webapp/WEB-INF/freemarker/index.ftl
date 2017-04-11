@@ -14,9 +14,9 @@
 <a href="http://localhost:8080/getTicketsForm">Show tickets</a><br>
 <a href="http://localhost:8080/getTicketsInPdfForm">Show tickets in PDF</a><br>
 <hr>
-<a href="http://localhost:8080/getUserByEmailForm">get user by email</a><br>
-<a href="http://localhost:8080/getUserByNameForm">get user by name</a><br>
+<a href="http://localhost:8080/getUserByEmailForm">Get user by email</a><br>
+<a href="http://localhost:8080/getUserByNameForm">Get user by name</a><br>
 <hr>
-<a href="http://localhost:8080/getUserByNameForm">get user by name</a><br>
+<a href="http://localhost:8080/uploadForm">Upload files with users and events</a><br>
 </body>
 </html>

@@ -20,15 +20,6 @@
         <property name="suffix" value=".ftl"/>
     </bean>
 
-    <!--&lt;!&ndash; JSP/JSTL view resolver &ndash;&gt;-->
-    <!--&lt;!&ndash;  view: "hello" -> /WEB-INF/pages/hello.jsp  &ndash;&gt;-->
-    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--&lt;!&ndash; JSTL view support &ndash;&gt;-->
-        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
-        <!--<property name="prefix" value="/WEB-INF/views/"/>  &lt;!&ndash; where JSP's are situated &ndash;&gt;-->
-        <!--<property name="suffix" value=".jsp"/>-->
-    <!--</bean>-->
-
     <bean id="resourceBundleViewResolver"
           class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
         <property name="basename" value="views"/>
