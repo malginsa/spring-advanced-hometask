@@ -1,13 +1,15 @@
 <html>
-<title>
-    Movie Theater
-</title>
 <head>
-    <h3>
-        List of tickets of ${userName} for ${eventName} on ${localDateTime}
-    </h3>
+    <title>
+        Movie Theater
+    </title>
 </head>
 <body>
+<h3>
+    List of tickets of ${userName} for ${eventName} on ${localDateTime}
+</h3>
+<a href="http://localhost:8080/index">Main Page</a><br>
+<hr>
 <table>
     <tr>
         <th>Seat</th>

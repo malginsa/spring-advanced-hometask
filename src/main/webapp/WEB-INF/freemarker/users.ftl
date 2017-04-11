@@ -1,13 +1,15 @@
 <html>
-<title>
-    Movie Theater
-</title>
 <head>
+    <title>
+        Movie Theater
+    </title>
     <h3>
         List of users
     </h3>
 </head>
 <body>
+<a href="http://localhost:8080/index">Main Page</a><br>
+<hr>
 <table>
     <tr>
         <th>FirstName</th>

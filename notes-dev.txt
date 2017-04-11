@@ -1,3 +1,13 @@
+------------------------------------------
+
+curl "http://localhost:8080/book/getTicketsInPdf?eventName=Mud&localDateTime=2017-01-11.18:00"
+curl "http://localhost:8080/book/getTickets?eventName=Mud&localDateTime=2017-01-11.18:00"
+
+curl "http://localhost:8080/book/doBookTickets?userId=1&eventName=Mud&localDateTime=2017-01-11.18:00&seat[]=17&seat[]=18"
+curl -H
+
+------------------------------------------
+
 mysql -u 111 -p movietheater
 
 use movietheater;

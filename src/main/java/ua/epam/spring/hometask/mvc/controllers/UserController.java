@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/user")
@@ -109,6 +109,4 @@ public class UserController {
         mav.addObject("message", "All users have been imported from file");
         return mav;
     }
-
-
 }
