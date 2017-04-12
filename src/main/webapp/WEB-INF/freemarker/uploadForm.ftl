@@ -20,7 +20,7 @@
         <input type="file" name="users"/>
         <h3>with events</h3>
         <input type="file" name="events"/>
-        <button class="btn btn-primary" type="submit">Upload</button>
+        <button class="btn btn-primary" type="submit"> Upload them</button>
     </div>
 </form>
 <hr>

@@ -13,7 +13,6 @@ import ua.epam.spring.hometask.service.AuditoriumService;
 import ua.epam.spring.hometask.service.EventService;
 import ua.epam.spring.hometask.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -62,17 +61,28 @@ public class MainController {
     }
 
     @RequestMapping(value = "/doUploadMultipartFile",
-                    method = RequestMethod.POST)
+        method = RequestMethod.POST)
     public String doUploadMultipartFile(
-            @RequestParam("file") MultipartFile multiPartFile,
-            // TODO unnessary
-            HttpServletRequest request) {
+        @RequestParam("users")
+            MultipartFile usersFile,
+        @RequestParam("events")
+            MultipartFile eventsFile) {
+
+        String name = "usersCopy";
         try {
-            multiPartFile.transferTo(new File("multipart.file"));
+            usersFile.transferTo(new File(name));
         } catch (IOException e) {
-            System.out.println("can't transfer to local file");
-            e.printStackTrace();
+            System.out.println("can't store to file " + name);
         }
+
+        name = "eventsCopy";
+        try {
+            eventsFile.transferTo(new File(name));
+        } catch (IOException e) {
+            System.out.println("can't store to file " + name);
+        }
+
+        return "index";
     }
 
     // tests data for SpringMVC facility
