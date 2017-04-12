@@ -16,10 +16,8 @@
       action="/doUploadMultipartFile"
       method="post">
     <div class="form-actions">
-        <h3>with users</h3>
-        <input type="file" name="users"/>
-        <h3>with events</h3>
-        <input type="file" name="events"/>
+        <p><input type="file" name="users"/> </p>
+        <p><input type="file" name="events"/> </p>
         <button class="btn btn-primary" type="submit"> Upload them</button>
     </div>
 </form>
