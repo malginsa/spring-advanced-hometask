@@ -68,6 +68,8 @@ public class MainController {
         @RequestParam("events")
             MultipartFile eventsFile) {
 
+
+
         String name = "usersCopy";
         try {
             usersFile.transferTo(new File(name));

@@ -32,7 +32,9 @@
         <jetty-maven-plugin.version>9.3.7.v20160115</jetty-maven-plugin.version>
         <freemarker.version>2.3.23</freemarker.version>
         <itex.version>2.1.7</itex.version>
+        <!-- TODO remove it -->
         <opencsv.version>2.3</opencsv.version>
+        <jackson.version>2.8.8</jackson.version>
     </properties>
 
     <build>
@@ -141,6 +143,13 @@
     </reporting>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
