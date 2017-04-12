@@ -3,6 +3,9 @@ package ua.epam.spring.hometask.mvc.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
 import ua.epam.spring.hometask.domain.User;
@@ -10,6 +13,9 @@ import ua.epam.spring.hometask.service.AuditoriumService;
 import ua.epam.spring.hometask.service.EventService;
 import ua.epam.spring.hometask.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -48,6 +54,25 @@ public class MainController {
     @RequestMapping("/getUserByNameForm")
     public String getUserByNameForm() {
         return "getUserByNameForm";
+    }
+
+    @RequestMapping("/uploadForm")
+    public String uploadForm() {
+        return "uploadForm";
+    }
+
+    @RequestMapping(value = "/doUploadMultipartFile",
+                    method = RequestMethod.POST)
+    public String doUploadMultipartFile(
+            @RequestParam("file") MultipartFile multiPartFile,
+            // TODO unnessary
+            HttpServletRequest request) {
+        try {
+            multiPartFile.transferTo(new File("multipart.file"));
+        } catch (IOException e) {
+            System.out.println("can't transfer to local file");
+            e.printStackTrace();
+        }
     }
 
     // tests data for SpringMVC facility

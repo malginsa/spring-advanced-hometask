@@ -11,7 +11,10 @@
 <a href="http://localhost:8080/index">Main Page</a><br>
 <hr>
 <label>Please, select json-files</label>
-<form class="form-horizontal" enctype="multipart/form-data" action="/doUploadMultipartFile" method="post">
+<form class="form-horizontal"
+      enctype="multipart/form-data"
+      action="/doUploadMultipartFile"
+      method="post">
     <div class="form-actions">
         <h3>with users</h3>
         <input type="file" name="users"/>
