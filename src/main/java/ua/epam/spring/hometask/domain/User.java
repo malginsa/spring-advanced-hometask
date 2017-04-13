@@ -4,9 +4,7 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author Yuriy_Tkach
@@ -28,7 +26,13 @@ public class User extends DomainObject {
 
     private LocalDate bithday;
 
+    private String password;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<UserRole> roles;
+
     public User() {
+        (roles = new HashSet<UserRole>()).add(UserRole.REGISTERED_USER);
     }
 
     public String getFirstName() {
@@ -74,6 +78,22 @@ public class User extends DomainObject {
     public User setBithday(LocalDate bithday) {
         this.bithday = bithday;
         return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRole> roles) {
+        this.roles = roles;
     }
 
     public boolean addTicket(Ticket ticket) {
