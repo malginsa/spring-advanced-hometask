@@ -8,7 +8,7 @@
 <h3>
     Upload files
 </h3>
-<a href="http://localhost:8080/index">Main Page</a><br>
+<a href="http://localhost:8080/mainMenu">Main Page</a><br>
 <hr>
 <label>Please, select json-files</label>
 <form class="form-horizontal"

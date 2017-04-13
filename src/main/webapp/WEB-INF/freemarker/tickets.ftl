@@ -8,7 +8,7 @@
 <h3>
     List of tickets of ${userName} for ${eventName} on ${localDateTime}
 </h3>
-<a href="http://localhost:8080/index">Main Page</a><br>
+<a href="http://localhost:8080/mainMenu">Main Page</a><br>
 <hr>
 <table>
     <tr>

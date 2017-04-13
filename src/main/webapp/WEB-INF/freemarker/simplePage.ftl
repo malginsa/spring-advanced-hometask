@@ -10,6 +10,6 @@
 <body>
 ${message}
 <hr>
-<a href="http://localhost:8080/index">Main Page</a><br>
+<a href="http://localhost:8080/mainMenu">Main Page</a><br>
 </body>
 </html>

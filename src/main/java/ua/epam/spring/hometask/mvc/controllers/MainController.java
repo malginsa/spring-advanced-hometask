@@ -35,6 +35,11 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/mainMenu")
+    public String mainMenu() {
+        return "mainMenu";
+    }
+
     @RequestMapping("/getTicketsForm")
     public String getTicketsForm() {
         return "getTicketsForm";
