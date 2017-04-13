@@ -1,11 +1,14 @@
 package ua.epam.spring.hometask.mvc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
 import ua.epam.spring.hometask.domain.User;
@@ -29,6 +32,11 @@ public class MainController {
 
     @Autowired
     private AuditoriumService auditoriumService;
+
+    @RequestMapping("/")
+    public String root() {
+        return "index";
+    }
 
     @RequestMapping("/index")
     public String index() {
@@ -65,6 +73,19 @@ public class MainController {
         return "uploadForm";
     }
 
+    @RequestMapping("/loggedUserInfo")
+    private ModelAndView loggedUserInfo(
+    ) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        org.springframework.security.core.userdetails.User principal =
+            (org.springframework.security.core.userdetails.User)
+                securityContext.getAuthentication().getPrincipal();
+        ModelAndView mav = new ModelAndView("simplePage");
+        mav.addObject("title", "Logged user info");
+        mav.addObject("message", "username: "+ principal.getUsername());
+        return mav;
+    }
+
     @RequestMapping(value = "/doUploadMultipartFile",
         method = RequestMethod.POST)
     public String doUploadMultipartFile(
@@ -72,23 +93,18 @@ public class MainController {
             MultipartFile usersFile,
         @RequestParam("events")
             MultipartFile eventsFile) {
-
-
-
         String name = "usersCopy";
         try {
             usersFile.transferTo(new File(name));
         } catch (IOException e) {
             System.out.println("can't store to file " + name);
         }
-
         name = "eventsCopy";
         try {
             eventsFile.transferTo(new File(name));
         } catch (IOException e) {
             System.out.println("can't store to file " + name);
         }
-
         return "index";
     }
 
