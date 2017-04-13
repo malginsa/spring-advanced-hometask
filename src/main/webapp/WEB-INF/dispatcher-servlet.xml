@@ -31,6 +31,5 @@
 
     <mvc:resources location="/resources/" mapping="/resources/**"/>
     <mvc:resources mapping="/favicon.ico" location="/resources/icons/favicon.ico" />
-    <!--<mvc:resources mapping="/index" location="/resources/index.html" />-->
 
 </beans>

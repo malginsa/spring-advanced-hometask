@@ -6,17 +6,23 @@
 			http://www.springframework.org/schema/security
 			http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http pattern="/resources/**" security="none"/>
+    <!--<http pattern="/resources/**" security="none"/>-->
 
     <http auto-config="true">
-        <intercept-url pattern="/**" access="ROLE_USER" />
+        <intercept-url pattern="/**" access="ROLE_USER" requires-channel="any"/>
+        <intercept-url pattern="/book" access="ROLE_ADMIN" requires-channel="https"/>
+        <intercept-url pattern="/user" access="ROLE_USER" requires-channel="https"/>
+        <intercept-url pattern="/secure/**" access="=ROLE_USER" requires-channel="https"/>
+        <port-mappings>
+            <port-mapping http="9080" https="9443"/>
+        </port-mappings>
     </http>
 
     <authentication-manager>
         <authentication-provider>
             <user-service>
-                <user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
-                <user name="bob" password="bobspassword" authorities="ROLE_USER" />
+                <user name="111" password="111" authorities="ROLE_USER" />
+                <user name="222" password="222" authorities="ROLE_USER, ROLE_ADMIN" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
