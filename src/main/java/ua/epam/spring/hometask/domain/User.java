@@ -157,4 +157,9 @@ public class User extends DomainObject {
                 ", bithday=" + bithday +
                 '}';
     }
+
+    public User addRole(UserRole role) {
+        roles.add(role);
+        return this;
+    }
 }

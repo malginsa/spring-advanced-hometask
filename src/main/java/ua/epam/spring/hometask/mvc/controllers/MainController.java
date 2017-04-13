@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
 import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.domain.UserRole;
 import ua.epam.spring.hometask.service.AuditoriumService;
 import ua.epam.spring.hometask.service.EventService;
 import ua.epam.spring.hometask.service.UserService;
@@ -20,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 @Controller
 public class MainController {
@@ -124,13 +126,15 @@ public class MainController {
             .setFirstName("Timothy")
             .setLastName("Budd")
             .setEmail("budd@eecs.oregonstate.edu")
-            .setBithday(LocalDate.of(1955, 3, 15));
+            .setBithday(LocalDate.of(1955, 3, 15))
+            .addRole(UserRole.BOOKING_MANAGER);
         timothy = userService.save(timothy);
         User timothy2 = new User()
             .setFirstName("Timothy")
             .setLastName("The Second")
             .setEmail("budd@eecs.oregonstate.edu")
-            .setBithday(LocalDate.of(1999, 9, 19));
+            .setBithday(LocalDate.of(1999, 9, 19))
+            .addRole(UserRole.BOOKING_MANAGER);
         timothy2 = userService.save(timothy2);
         return "index";
     }
