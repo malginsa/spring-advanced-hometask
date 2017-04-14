@@ -9,8 +9,8 @@
     <!--<http pattern="/index" security="none"/>-->
 
     <http auto-config="true">
-        <intercept-url pattern="/getTickets*" access="hasRole('ROLE_ADMIN')" requires-channel="any"/>
-        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="any"/>
+        <intercept-url pattern="/getTickets*" access="hasRole('ROLE_BOOKING_MANAGER')" requires-channel="any"/>
+        <intercept-url pattern="/**" access="hasRole('ROLE_REGISTERED_USER')" requires-channel="any"/>
         <form-login default-target-url="/"/>
         <logout invalidate-session="true"
                 logout-success-url="/index"
@@ -21,8 +21,8 @@
     <authentication-manager>
         <authentication-provider>
             <user-service>
-                <user name="1" password="1" authorities="ROLE_USER" />
-                <user name="2" password="2" authorities="ROLE_USER, ROLE_ADMIN" />
+                <user name="1" password="1" authorities="ROLE_REGISTERED_USER" />
+                <user name="2" password="2" authorities="ROLE_REGISTERED_USER, ROLE_BOOKING_MANAGER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
