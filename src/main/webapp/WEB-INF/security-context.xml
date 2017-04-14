@@ -11,6 +11,7 @@
     <http auto-config="true">
         <intercept-url pattern="/getTickets*" access="hasRole('ROLE_ADMIN')" requires-channel="any"/>
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="any"/>
+        <form-login default-target-url="/"/>
         <logout invalidate-session="true"
                 logout-success-url="/index"
                 delete-cookies="JSESSIONID"/>
