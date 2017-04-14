@@ -84,16 +84,18 @@ public class User extends DomainObject {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public Set<UserRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<UserRole> roles) {
+    public User setRoles(Set<UserRole> roles) {
         this.roles = roles;
+        return this;
     }
 
     public boolean addTicket(Ticket ticket) {

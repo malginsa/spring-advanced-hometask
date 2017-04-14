@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -84,7 +84,13 @@ public class MainController {
                 securityContext.getAuthentication().getPrincipal();
         ModelAndView mav = new ModelAndView("simplePage");
         mav.addObject("title", "Logged user info");
-        mav.addObject("message", "username: "+ principal.getUsername());
+        String auth = principal
+                .getAuthorities()
+                .stream()
+                .collect(Collectors.toList())
+                .toString();
+        mav.addObject("message",
+                "username: "+ principal.getUsername() + "  auth: "+ auth);
         return mav;
     }
 
@@ -127,6 +133,7 @@ public class MainController {
             .setLastName("Budd")
             .setEmail("budd@eecs.oregonstate.edu")
             .setBithday(LocalDate.of(1955, 3, 15))
+            .setPassword("platypus")
             .addRole(UserRole.BOOKING_MANAGER);
         timothy = userService.save(timothy);
         User timothy2 = new User()
@@ -134,6 +141,7 @@ public class MainController {
             .setLastName("The Second")
             .setEmail("budd@eecs.oregonstate.edu")
             .setBithday(LocalDate.of(1999, 9, 19))
+            .setPassword("platypus")
             .addRole(UserRole.BOOKING_MANAGER);
         timothy2 = userService.save(timothy2);
         return "index";

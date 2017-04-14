@@ -16,6 +16,8 @@
         <th>LastName</th>
         <th>EMail</th>
         <th>Birthday</th>
+        <th>Password</th>
+        <th>Roles</th>
     </tr>
     <#list users as user>
         <tr>
@@ -23,6 +25,8 @@
             <td>${user.lastName}</td>
             <td>${user.email}</td>
             <td>${user.bithday}</td>
+            <td>${user.password}</td>
+            <td><#list user.roles as role>${role}, </#list></td>
         </tr>
     </#list>
 </table>
