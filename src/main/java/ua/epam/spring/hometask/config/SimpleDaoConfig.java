@@ -13,11 +13,6 @@ import ua.epam.spring.hometask.dao.simple.UserServiceSimpleDao;
 public class SimpleDaoConfig {
 
     @Bean
-    public UserServiceDao userServiceDao() {
-        return new UserServiceSimpleDao();
-    }
-
-    @Bean
     public EventServiceDao eventServiceDao() {
         return new EventServiceSimpleDao();
     }

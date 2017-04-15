@@ -19,12 +19,8 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="1" password="1" authorities="ROLE_REGISTERED_USER" />
-                <user name="2" password="2" authorities="ROLE_REGISTERED_USER, ROLE_BOOKING_MANAGER" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="userDetailsServiceImpl"/>
+        <!--<authentication-provider ref="daoAuthenticationProvider"/>-->
     </authentication-manager>
 
 </b:beans>

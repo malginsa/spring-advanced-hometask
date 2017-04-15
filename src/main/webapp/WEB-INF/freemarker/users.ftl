@@ -22,11 +22,11 @@
     <#list users as user>
         <tr>
             <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>${user.email}</td>
-            <td>${user.bithday}</td>
-            <td>${user.password}</td>
-            <td><#list user.roles as role>${role}, </#list></td>
+            <td><#if user.lastName??>${user.lastName}</#if></td>
+            <td><#if user.email??>${user.email}</#if></td>
+            <td><#if user.bithday??>${user.bithday}</#if></td>
+            <td><#if user.password??>${user.password}</#if></td>
+            <td><#list user.roles as role>${role},</#list></td>
         </tr>
     </#list>
 </table>

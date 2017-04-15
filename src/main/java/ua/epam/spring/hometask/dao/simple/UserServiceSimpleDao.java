@@ -8,6 +8,7 @@ import ua.epam.spring.hometask.domain.User;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
@@ -18,8 +19,8 @@ public class UserServiceSimpleDao implements UserServiceDao{
 
     Collection<User> storage;
 
-    public UserServiceSimpleDao() {
-        storage = new ArrayList<>();
+    public UserServiceSimpleDao(List<User> users) {
+        storage = users;
     }
 
     @Override

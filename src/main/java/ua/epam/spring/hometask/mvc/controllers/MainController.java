@@ -37,6 +37,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String root() {
+        populateTestDataForMVC();
         return "index";
     }
 
@@ -78,10 +79,11 @@ public class MainController {
     @RequestMapping("/loggedUserInfo")
     private ModelAndView loggedUserInfo(
     ) {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        org.springframework.security.core.userdetails.User principal =
-            (org.springframework.security.core.userdetails.User)
-                securityContext.getAuthentication().getPrincipal();
+        org.springframework.security.core.userdetails.UserDetails principal =
+            (org.springframework.security.core.userdetails.UserDetails)
+                SecurityContextHolder.getContext()
+                        .getAuthentication()
+                        .getPrincipal();
         ModelAndView mav = new ModelAndView("simplePage");
         mav.addObject("title", "Logged user info");
         String auth = principal
@@ -94,6 +96,26 @@ public class MainController {
         return mav;
     }
 
+    // TODO
+//    private ModelAndView loggedUserInfo(
+//    ) {
+//        org.springframework.security.core.userdetails.User principal =
+//            (org.springframework.security.core.userdetails.User)
+//                SecurityContextHolder.getContext()
+//                        .getAuthentication()
+//                        .getPrincipal();
+//        ModelAndView mav = new ModelAndView("simplePage");
+//        mav.addObject("title", "Logged user info");
+//        String auth = principal
+//                .getAuthorities()
+//                .stream()
+//                .collect(Collectors.toList())
+//                .toString();
+//        mav.addObject("message",
+//                "username: "+ principal.getUsername() + "  auth: "+ auth);
+//        return mav;
+//    }
+//
     @RequestMapping(value = "/doUploadMultipartFile",
         method = RequestMethod.POST)
     public String doUploadMultipartFile(
@@ -120,6 +142,7 @@ public class MainController {
     // TODO delete before releasing
     @RequestMapping("/populateTestData")
     private String populateTestDataForMVC() {
+
         Event mud = (new Event())
             .setName("Mud")
             .setRating(EventRating.MID)
@@ -128,22 +151,39 @@ public class MainController {
             LocalDateTime.of(2017, 1, 11, 18, 0),
             auditoriumService.getByName("Aurora").get());
         mud = eventService.save(mud);
+
         User timothy = new User()
             .setFirstName("Timothy")
             .setLastName("Budd")
             .setEmail("budd@eecs.oregonstate.edu")
             .setBithday(LocalDate.of(1955, 3, 15))
             .setPassword("platypus")
-            .addRole(UserRole.BOOKING_MANAGER);
+            .addRole(UserRole.REGISTERED_USER);
         timothy = userService.save(timothy);
+
         User timothy2 = new User()
             .setFirstName("Timothy")
             .setLastName("The Second")
             .setEmail("budd@eecs.oregonstate.edu")
             .setBithday(LocalDate.of(1999, 9, 19))
             .setPassword("platypus")
-            .addRole(UserRole.BOOKING_MANAGER);
+            .addRole(UserRole.REGISTERED_USER);
         timothy2 = userService.save(timothy2);
+
+        User manager = new User()
+                .setFirstName("manager")
+                .setPassword("1")
+                .addRole(UserRole.REGISTERED_USER)
+                .addRole(UserRole.BOOKING_MANAGER);
+        manager = userService.save(manager);
+
+        User cashier = new User()
+                .setFirstName("cashier")
+                .setPassword("1")
+                .addRole(UserRole.REGISTERED_USER)
+                .addRole(UserRole.BOOKING_MANAGER);
+        cashier = userService.save(cashier);
+
         return "index";
     }
 }

@@ -20,6 +20,12 @@ public class UserServicePersistentDao implements UserServiceDao {
     private static final Logger LOG =
             Logger.getLogger(UserServicePersistentDao.class);
 
+    public UserServicePersistentDao(List<User> users) {
+        for (User user : users) {
+            save(user);
+        }
+    }
+
     @Override
     public User getUserByEmail(String email) {
         EntityManager manager = HibernateUtil.getEntityManager();

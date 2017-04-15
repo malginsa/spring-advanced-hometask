@@ -14,11 +14,6 @@ import ua.epam.spring.hometask.domain.CounterType;
 public class PersistentDaoConfig {
 
     @Bean
-    public UserServiceDao userServiceDao() {
-        return new UserServicePersistentDao();
-    }
-
-    @Bean
     public EventServiceDao eventServiceDao() {
         return new EventServicePersistentDao();
     }
