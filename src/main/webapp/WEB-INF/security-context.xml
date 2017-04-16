@@ -6,20 +6,37 @@
 			http://www.springframework.org/schema/security
 			http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <!--<http pattern="/index" security="none"/>-->
+    <!--<http pattern="/welcome" security="none"/>-->
 
     <http auto-config="true">
-        <intercept-url pattern="/getTickets*" access="hasRole('ROLE_BOOKING_MANAGER')" requires-channel="any"/>
-        <intercept-url pattern="/**" access="hasRole('ROLE_REGISTERED_USER')" requires-channel="any"/>
-        <form-login default-target-url="/"/>
+
+        <form-login login-page="/login?error=false"
+                    login-processing-url="/login"
+                    username-parameter="username"
+                    password-parameter="password"
+                    default-target-url="/mainMenu"
+                    authentication-failure-url="/login?error=true"/>
+
         <logout invalidate-session="true"
                 logout-success-url="/index"
                 delete-cookies="JSESSIONID"/>
+
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/getTickets*" access="hasRole('ROLE_BOOKING_MANAGER')" requires-channel="any"/>
+        <intercept-url pattern="/**" access="hasRole('ROLE_REGISTERED_USER')" requires-channel="any"/>
+
         <csrf disabled="true"/>
+
+        <!--<remember-me key="rememberMeAppKey"/>-->
+
+        <!--<remember-me data-source-ref="rememberMeDataSource"/>-->
+
     </http>
 
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsServiceImpl"/>
     </authentication-manager>
+
+    <!--<b:bean id="rememberMeDataSource" class="org.springframework.jdbc.datasource."-->
 
 </b:beans>

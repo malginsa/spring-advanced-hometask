@@ -1,9 +1,11 @@
 package ua.epam.spring.hometask.mvc.controllers;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,8 @@ import java.util.stream.Collectors;
 @Controller
 public class MainController {
 
+    private static final Logger LOG = Logger.getLogger(MainController.class);
+
     @Autowired
     private EventService eventService;
 
@@ -43,6 +47,21 @@ public class MainController {
     @RequestMapping("/index")
     public String index() {
         return "index";
+    }
+
+    @RequestMapping("/login")
+    public String login(@RequestParam(required = false) Boolean error,
+                        Model model) {
+        if (null == error) {
+            model.addAttribute("error", false);
+            return "login";
+        }
+//        if (!error) {
+//            model.addAttribute("error", false);
+//            return "login";
+//        }
+        model.addAttribute("error", error);
+        return "login";
     }
 
     @RequestMapping("/mainMenu")
