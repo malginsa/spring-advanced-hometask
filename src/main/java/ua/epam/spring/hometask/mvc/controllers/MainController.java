@@ -37,7 +37,6 @@ public class MainController {
 
     @RequestMapping("/")
     public String root() {
-        populateTestDataForMVC();
         return "index";
     }
 
@@ -96,26 +95,6 @@ public class MainController {
         return mav;
     }
 
-    // TODO
-//    private ModelAndView loggedUserInfo(
-//    ) {
-//        org.springframework.security.core.userdetails.User principal =
-//            (org.springframework.security.core.userdetails.User)
-//                SecurityContextHolder.getContext()
-//                        .getAuthentication()
-//                        .getPrincipal();
-//        ModelAndView mav = new ModelAndView("simplePage");
-//        mav.addObject("title", "Logged user info");
-//        String auth = principal
-//                .getAuthorities()
-//                .stream()
-//                .collect(Collectors.toList())
-//                .toString();
-//        mav.addObject("message",
-//                "username: "+ principal.getUsername() + "  auth: "+ auth);
-//        return mav;
-//    }
-//
     @RequestMapping(value = "/doUploadMultipartFile",
         method = RequestMethod.POST)
     public String doUploadMultipartFile(
@@ -158,7 +137,7 @@ public class MainController {
             .setEmail("budd@eecs.oregonstate.edu")
             .setBithday(LocalDate.of(1955, 3, 15))
             .setPassword("platypus")
-            .addRole(UserRole.REGISTERED_USER);
+            .addRole(UserRole.ROLE_REGISTERED_USER);
         timothy = userService.save(timothy);
 
         User timothy2 = new User()
@@ -167,22 +146,8 @@ public class MainController {
             .setEmail("budd@eecs.oregonstate.edu")
             .setBithday(LocalDate.of(1999, 9, 19))
             .setPassword("platypus")
-            .addRole(UserRole.REGISTERED_USER);
+            .addRole(UserRole.ROLE_REGISTERED_USER);
         timothy2 = userService.save(timothy2);
-
-        User manager = new User()
-                .setFirstName("manager")
-                .setPassword("1")
-                .addRole(UserRole.REGISTERED_USER)
-                .addRole(UserRole.BOOKING_MANAGER);
-        manager = userService.save(manager);
-
-        User cashier = new User()
-                .setFirstName("cashier")
-                .setPassword("1")
-                .addRole(UserRole.REGISTERED_USER)
-                .addRole(UserRole.BOOKING_MANAGER);
-        cashier = userService.save(cashier);
 
         return "index";
     }

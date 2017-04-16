@@ -43,8 +43,6 @@ public class AppConfig {
         return new UserServiceSimpleDao(users());
     }
 
-
-
     @Bean
     public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
         PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
@@ -133,7 +131,7 @@ public class AppConfig {
             }
             key = prefix + ".password";
             if (userProps.containsKey(key)) {
-                user.setFirstName(userProps.get(key));
+                user.setPassword(userProps.get(key));
             }
             key = prefix + ".roles";
             if (userProps.containsKey(key)) {

@@ -2,7 +2,7 @@ package ua.epam.spring.hometask.domain;
 
 public enum UserRole {
 
-    REGISTERED_USER,
+    ROLE_REGISTERED_USER,
 
-    BOOKING_MANAGER;
+    ROLE_BOOKING_MANAGER;
 }

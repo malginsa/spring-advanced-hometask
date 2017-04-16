@@ -1,42 +1,51 @@
 package ua.epam.spring.hometask.mvc.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.service.UserService;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 
-    String username;
+    User user;
 
-    public UserDetailsImpl(String username) {
-        this.username = username;
+    @Autowired
+    @Qualifier("userService")
+    private UserService userService;
+
+    public UserDetailsImpl() {
+    }
+
+    public UserDetailsImpl(User user) {
+        this.user = user;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        ArrayList<GrantedAuthority> result = new ArrayList<>();
-        if ("1".equals(username) || "2".equals(username)) {
-            result.add(new GrantedAuthorityImpl("ROLE_REGISTERED_USER"));
-        }
-        if ("2".equals(username)) {
-            result.add(new GrantedAuthorityImpl("ROLE_BOOKING_MANAGER"));
-        }
-        return result;
+        return user.getRoles()
+                .stream()
+                .map(GrantedAuthorityImpl::new)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
     public String getPassword() {
-        if ("1".equals(username)) return "1";
-        if ("2".equals(username)) return "2";
-        if ("3".equals(username)) return "3";
-        return null;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return user.getFirstName();
     }
 
     @Override

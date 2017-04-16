@@ -32,7 +32,8 @@ public class User extends DomainObject {
     private Set<UserRole> roles;
 
     public User() {
-        (roles = new HashSet<UserRole>()).add(UserRole.REGISTERED_USER);
+        roles = new HashSet<UserRole>();
+        roles.add(UserRole.ROLE_REGISTERED_USER);
     }
 
     public String getFirstName() {
@@ -156,7 +157,10 @@ public class User extends DomainObject {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", tickets=" + tickets +
                 ", bithday=" + bithday +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 

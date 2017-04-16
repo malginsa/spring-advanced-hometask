@@ -1,4 +1,4 @@
-package archive;
+package ua.epam.spring.hometask;
 
 import ua.epam.spring.hometask.domain.UserRole;
 
@@ -15,5 +15,6 @@ public class EnumTest {
         TreeSet<UserRole> collect = Arrays.stream(split)
                 .map(UserRole::valueOf)
                 .collect(Collectors.toCollection(TreeSet::new));
+
     }
 }
