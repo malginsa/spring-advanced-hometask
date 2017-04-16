@@ -133,6 +133,10 @@ public class AppConfig {
             if (userProps.containsKey(key)) {
                 user.setPassword(userProps.get(key));
             }
+            key = prefix + ".email";
+            if (userProps.containsKey(key)) {
+                user.setEmail(userProps.get(key));
+            }
             key = prefix + ".roles";
             if (userProps.containsKey(key)) {
                 Arrays.stream(userProps.get(key).split(","))

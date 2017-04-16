@@ -56,10 +56,6 @@ public class MainController {
             model.addAttribute("error", false);
             return "login";
         }
-//        if (!error) {
-//            model.addAttribute("error", false);
-//            return "login";
-//        }
         model.addAttribute("error", error);
         return "login";
     }
@@ -137,7 +133,6 @@ public class MainController {
     }
 
     // tests data for SpringMVC facility
-    // TODO delete before releasing
     @RequestMapping("/populateTestData")
     private String populateTestDataForMVC() {
 
@@ -155,8 +150,9 @@ public class MainController {
             .setLastName("Budd")
             .setEmail("budd@eecs.oregonstate.edu")
             .setBithday(LocalDate.of(1955, 3, 15))
-            .setPassword("platypus")
-            .addRole(UserRole.ROLE_REGISTERED_USER);
+                // password is "1"
+            .setPassword("848d465b509f3c18fd577475294859e4175e42dbd5c90e695f6e5b0226a76c103bd3a96bbf52903e")
+                .addRole(UserRole.ROLE_REGISTERED_USER);
         timothy = userService.save(timothy);
 
         User timothy2 = new User()
@@ -164,7 +160,8 @@ public class MainController {
             .setLastName("The Second")
             .setEmail("budd@eecs.oregonstate.edu")
             .setBithday(LocalDate.of(1999, 9, 19))
-            .setPassword("platypus")
+                // password is "1"
+            .setPassword("591da941e5af5a7bd0314d343f5762bcf101efa9ca9b4c79a26da61bc3ffec26a96c2a1d5890da43")
             .addRole(UserRole.ROLE_REGISTERED_USER);
         timothy2 = userService.save(timothy2);
 
