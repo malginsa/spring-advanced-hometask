@@ -14,7 +14,6 @@ import static org.junit.Assert.assertEquals;
 
 public class TestDiscountAspect {
 
-//    TODO
 //    @Test
     public void testDiscountAspect() {
         AnnotationConfigApplicationContext ctx =

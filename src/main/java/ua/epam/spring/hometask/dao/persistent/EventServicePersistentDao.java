@@ -89,7 +89,7 @@ public class EventServicePersistentDao implements EventServiceDao {
         }
     }
 
-//    TODO
+//    TODO replace method above with this. Test it
 //    @Override
 //    public Optional<Event> getByName(String name) {
 //        EntityManager entityManager = HibernateUtil.getEntityManager();

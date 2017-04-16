@@ -41,7 +41,6 @@ public class TestCounterAspect {
         ctx.close();
     }
 
-//    TODO
 //    @Test
     public void testGetByName() {
         Event event = (Event) ctx.getBean("jPoint");
@@ -54,7 +53,6 @@ public class TestCounterAspect {
         assertEquals(before + 1, after);
     }
 
-    //    TODO
 //    @Test
     public void testGetBasePrice() {
         Event event = (Event) ctx.getBean("jPoint");
@@ -64,7 +62,6 @@ public class TestCounterAspect {
         assertEquals(before + 1, after);
     }
 
-    //    TODO
 //    @Test
     public void testBookTickets() {
         Auditorium fakel = (Auditorium) ctx.getBean("fakel");

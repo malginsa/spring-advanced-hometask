@@ -68,7 +68,6 @@ public class TestEventServiceDao {
         assertEquals(before + 1, after);
     }
 
-    // TODO
 //    @Test
     public void testGetForDateRange() {
         fakel = (Auditorium) ctx.getBean("fakel");
