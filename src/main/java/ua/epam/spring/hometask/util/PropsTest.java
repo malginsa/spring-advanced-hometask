@@ -1,18 +1,20 @@
 package ua.epam.spring.hometask.util;
 
 import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.domain.UserRole;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class PropsTest {
 
     public static void main(String[] args) {
 
-        HashMap<String, String> props = new HashMap<>();
+        Map<String, String> props = new HashMap<>();
 
         props.put("manager.firstName", "manager");
         props.put("manager.password", "4813c5f92abe8855c0e8acbd0383e484b05dc1fa8518566893317f2f5ac07d7f825d88190fb60588");
@@ -37,8 +39,19 @@ public class PropsTest {
                 .map(s -> s.split("\\.")[0])
                 .collect(Collectors.toSet());
 
-//            BiFunction<User, String, User> setFirstName = User::setFirstName;
-//            BiConsumer<String> setFirstName = (user, firstName) -> user.setFirstName(firstName);
+        BiFunction<User, String, User> setFirstName = User::setFirstName;
+
+        Map<String, BiFunction<User, String, User>> suffixToMethod = new HashMap<>();
+        suffixToMethod.put("firstName", User::setFirstName);
+        suffixToMethod.put("password", User::setPassword);
+        suffixToMethod.put("email", User::setEmail);
+
+        String s = "ROLE_REGISTERED_USER,ROLE_BOOKING_MANAGER";
+//        Arrays.stream(s.split(","))
+//                .map(UserRole::valueOf)
+//                .forEach();
+
+//        suffixToMethod.put("roles", (user, s) -> {});
 
     }
 
