@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-public class PropsTest {
+public class PropsImportTest {
 
     public static void main(String[] args) {
 
