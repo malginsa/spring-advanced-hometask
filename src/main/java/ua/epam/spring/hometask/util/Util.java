@@ -1,4 +1,4 @@
-package ua.epam.spring.hometask;
+package ua.epam.spring.hometask.util;
 
 public class Util {
 

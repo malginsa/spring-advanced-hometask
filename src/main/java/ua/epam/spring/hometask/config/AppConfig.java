@@ -1,6 +1,5 @@
 package ua.epam.spring.hometask.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +9,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import ua.epam.spring.hometask.dao.AuditoriumServiceDao;
 import ua.epam.spring.hometask.dao.UserServiceDao;
-import ua.epam.spring.hometask.dao.persistent.AuditoriumServicePersistentDao;
-import ua.epam.spring.hometask.dao.persistent.UserServicePersistentDao;
 import ua.epam.spring.hometask.dao.simple.AuditoriumServiceSimpleDao;
 import ua.epam.spring.hometask.dao.simple.UserServiceSimpleDao;
 import ua.epam.spring.hometask.domain.Auditorium;

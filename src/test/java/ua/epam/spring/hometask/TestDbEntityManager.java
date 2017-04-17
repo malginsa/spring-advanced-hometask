@@ -1,9 +1,9 @@
 package ua.epam.spring.hometask;
 
-import org.junit.Test;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
+import ua.epam.spring.hometask.util.HibernateUtil;
 
 import javax.persistence.EntityManager;
 import java.util.HashSet;

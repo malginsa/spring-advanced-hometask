@@ -1,7 +1,7 @@
 package ua.epam.spring.hometask.dao.persistent;
 
 import org.apache.log4j.Logger;
-import ua.epam.spring.hometask.HibernateUtil;
+import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.CounterDao;
 import ua.epam.spring.hometask.domain.Counter;
 import ua.epam.spring.hometask.domain.CounterType;

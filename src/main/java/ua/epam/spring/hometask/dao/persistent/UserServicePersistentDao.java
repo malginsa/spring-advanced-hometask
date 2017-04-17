@@ -1,7 +1,7 @@
 package ua.epam.spring.hometask.dao.persistent;
 
 import org.apache.log4j.Logger;
-import ua.epam.spring.hometask.HibernateUtil;
+import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.UserServiceDao;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
