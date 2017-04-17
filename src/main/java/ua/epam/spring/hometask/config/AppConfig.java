@@ -64,6 +64,7 @@ public class AppConfig {
     @Resource(name = "auditoriumPropsBean")
     private Map<String, String> auditoriumProps;
 
+//    TODO refactor auditoriums() and users() using lambda
     public List<Auditorium> auditoriums() {
 
         Set<String> prefixes = auditoriumProps
