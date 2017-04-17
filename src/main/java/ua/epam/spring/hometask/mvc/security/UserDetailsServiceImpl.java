@@ -12,7 +12,7 @@ import ua.epam.spring.hometask.service.UserService;
 
 import java.util.Iterator;
 
-@Component("userDetailsServiceImpl")
+@Component("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private static final Logger LOG = Logger.getLogger(UserDetailsServiceImpl.class);
