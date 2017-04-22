@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.dao.persistent;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.AuditoriumServiceDao;
 import ua.epam.spring.hometask.domain.Auditorium;
@@ -15,8 +16,7 @@ import java.util.Set;
 
 public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
 
-    private static final Logger LOG =
-            Logger.getLogger(AuditoriumServicePersistentDao.class);
+    private static final Logger LOG = LogManager.getLogger(AuditoriumServicePersistentDao.class.getSimpleName());
 
     public AuditoriumServicePersistentDao(List<Auditorium> auditoriums) {
         for (Auditorium auditorium : auditoriums) {

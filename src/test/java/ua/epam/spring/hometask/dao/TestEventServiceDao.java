@@ -1,8 +1,6 @@
 package ua.epam.spring.hometask.dao;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ua.epam.spring.hometask.AppConfigForTesting;
 import ua.epam.spring.hometask.config.AppConfig;
@@ -24,9 +22,8 @@ public class TestEventServiceDao {
     private static Event millenium;
     private static Auditorium fakel;
 
-    // @BeforeClass
-    @Before
-    public void before() {
+    @BeforeClass
+    public static void before() {
         ctx = new AnnotationConfigApplicationContext(
                 AppConfig.class,
                 AppConfigForTesting.class);
@@ -37,9 +34,8 @@ public class TestEventServiceDao {
         millenium = (Event) ctx.getBean("millenium");
     }
 
-    // @AfterClass
-    @After
-    public void after() {
+    @AfterClass
+    public static void after() {
         ctx.close();
     }
 

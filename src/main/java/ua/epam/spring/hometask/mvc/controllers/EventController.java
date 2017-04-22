@@ -1,7 +1,8 @@
 package ua.epam.spring.hometask.mvc.controllers;
 
 import au.com.bytecode.opencsv.CSVReader;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,22 +12,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
-import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.EventService;
-import ua.epam.spring.hometask.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/event")
 public class EventController {
 
-    private static final Logger LOG = Logger.getLogger(UserController.class);
+    private static final Logger LOG = LogManager.getLogger(UserController.class.getSimpleName());
 
     @Autowired
     private EventService eventService;

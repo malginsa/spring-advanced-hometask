@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.dao.persistent;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.CounterDao;
 import ua.epam.spring.hometask.domain.Counter;
@@ -13,8 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class CounterPersistentDao implements CounterDao {
 
-    private static final Logger LOG =
-            Logger.getLogger(CounterPersistentDao.class);
+    private static final Logger LOG = LogManager.getLogger(CounterPersistentDao.class.getSimpleName());
 
     private AtomicInteger countValue;
     private CounterType counterType;

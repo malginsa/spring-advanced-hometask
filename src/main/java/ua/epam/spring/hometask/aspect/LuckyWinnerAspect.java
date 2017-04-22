@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.aspect;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Component("luckyWinnerAspect")
 public class LuckyWinnerAspect {
 
-    private static final Logger LOG = Logger.getLogger(DiscountAspect.class);
+    private static final Logger LOG = LogManager.getLogger(DiscountAspect.class.getSimpleName());
 
     private Random random;
     @Value("${luckiness}")

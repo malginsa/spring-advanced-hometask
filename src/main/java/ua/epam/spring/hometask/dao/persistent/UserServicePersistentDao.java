@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.dao.persistent;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.UserServiceDao;
 import ua.epam.spring.hometask.domain.Event;
@@ -17,8 +18,7 @@ import java.util.stream.Collectors;
 
 public class UserServicePersistentDao implements UserServiceDao {
 
-    private static final Logger LOG =
-            Logger.getLogger(UserServicePersistentDao.class);
+    private static final Logger LOG = LogManager.getLogger(UserServicePersistentDao.class.getSimpleName());
 
     public UserServicePersistentDao(List<User> users) {
         for (User user : users) {

@@ -1,8 +1,8 @@
 package ua.epam.spring.hometask.mvc.controllers;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Controller
 public class MainController {
 
-    private static final Logger LOG = Logger.getLogger(MainController.class);
+    private static final Logger LOG = LogManager.getLogger(MainController.class.getSimpleName());
 
     @Autowired
     private EventService eventService;

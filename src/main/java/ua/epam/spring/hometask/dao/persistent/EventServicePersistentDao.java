@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.dao.persistent;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.EventServiceDao;
 import ua.epam.spring.hometask.domain.Event;
@@ -16,8 +17,7 @@ import java.util.stream.Collectors;
 
 public class EventServicePersistentDao implements EventServiceDao {
 
-    private static final Logger LOG =
-            Logger.getLogger(EventServicePersistentDao.class);
+    private static final Logger LOG = LogManager.getLogger(EventServicePersistentDao.class.getSimpleName());
 
     @Override
     public Event save(Event event) {

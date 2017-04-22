@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import ua.epam.spring.hometask.dao.AuditoriumServiceDao;
 import ua.epam.spring.hometask.dao.UserServiceDao;
+import ua.epam.spring.hometask.dao.persistent.AuditoriumServicePersistentDao;
+import ua.epam.spring.hometask.dao.persistent.UserServicePersistentDao;
 import ua.epam.spring.hometask.dao.simple.AuditoriumServiceSimpleDao;
 import ua.epam.spring.hometask.dao.simple.UserServiceSimpleDao;
 import ua.epam.spring.hometask.domain.Auditorium;
@@ -25,19 +27,19 @@ import java.util.stream.Collectors;
 //        CounterAspect.class,      // TODO aspect prevent JPA facility
 //        DiscountAspect.class,
 //        LuckyWinnerAspect.class,
-        SimpleDaoConfig.class,     // uses in-memory structures
-//        PersistentDaoConfig.class,  // uses persistent DB
+//        SimpleDaoConfig.class,     // uses in-memory structures
+        PersistentDaoConfig.class,  // uses persistent DB
 })
 public class AppConfig {
 
     @Bean
     public AuditoriumServiceDao auditoriumServiceDao() {
-        return new AuditoriumServiceSimpleDao(auditoriums());
+        return new AuditoriumServicePersistentDao(auditoriums());
     }
 
     @Bean
     public UserServiceDao userServiceDao() {
-        return new UserServiceSimpleDao(users());
+        return new UserServicePersistentDao(users());
     }
 
     @Bean
