@@ -11,8 +11,6 @@ import ua.epam.spring.hometask.dao.AuditoriumServiceDao;
 import ua.epam.spring.hometask.dao.UserServiceDao;
 import ua.epam.spring.hometask.dao.persistent.AuditoriumServicePersistentDao;
 import ua.epam.spring.hometask.dao.persistent.UserServicePersistentDao;
-import ua.epam.spring.hometask.dao.simple.AuditoriumServiceSimpleDao;
-import ua.epam.spring.hometask.dao.simple.UserServiceSimpleDao;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.domain.UserRole;

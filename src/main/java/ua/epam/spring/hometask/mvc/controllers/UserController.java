@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/user")
 public class UserController {
 
-    private static final Logger LOG = LogManager.getLogger(UserController.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     @Autowired
     private UserService userService;

@@ -17,7 +17,7 @@ import java.util.Set;
 @Component("luckyWinnerAspect")
 public class LuckyWinnerAspect {
 
-    private static final Logger LOG = LogManager.getLogger(DiscountAspect.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     private Random random;
     @Value("${luckiness}")

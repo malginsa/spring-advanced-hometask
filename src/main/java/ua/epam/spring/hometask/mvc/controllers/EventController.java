@@ -23,7 +23,7 @@ import java.io.IOException;
 @RequestMapping("/event")
 public class EventController {
 
-    private static final Logger LOG = LogManager.getLogger(UserController.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     @Autowired
     private EventService eventService;

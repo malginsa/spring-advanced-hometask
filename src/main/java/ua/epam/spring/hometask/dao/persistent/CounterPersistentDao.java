@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class CounterPersistentDao implements CounterDao {
 
-    private static final Logger LOG = LogManager.getLogger(CounterPersistentDao.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     private AtomicInteger countValue;
     private CounterType counterType;

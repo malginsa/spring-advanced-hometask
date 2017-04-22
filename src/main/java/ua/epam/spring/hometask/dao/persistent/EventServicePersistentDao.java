@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class EventServicePersistentDao implements EventServiceDao {
 
-    private static final Logger LOG = LogManager.getLogger(EventServicePersistentDao.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     @Override
     public Event save(Event event) {

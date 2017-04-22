@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
 
-    private static final Logger LOG = LogManager.getLogger(AuditoriumServicePersistentDao.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     public AuditoriumServicePersistentDao(List<Auditorium> auditoriums) {
         for (Auditorium auditorium : auditoriums) {

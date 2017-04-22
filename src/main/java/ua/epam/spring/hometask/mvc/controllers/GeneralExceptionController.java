@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class GeneralExceptionController {
 
-private static final Logger LOG = LogManager.getLogger(GeneralExceptionController.class.getSimpleName());
+private static final Logger LOG = LogManager.getLogger();
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

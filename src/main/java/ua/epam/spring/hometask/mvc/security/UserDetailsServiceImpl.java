@@ -16,7 +16,7 @@ import java.util.Iterator;
 @Component("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private static final Logger LOG = LogManager.getLogger(UserDetailsServiceImpl.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     @Autowired
     @Qualifier("userService")

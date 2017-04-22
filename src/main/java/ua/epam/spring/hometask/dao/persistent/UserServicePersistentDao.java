@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class UserServicePersistentDao implements UserServiceDao {
 
-    private static final Logger LOG = LogManager.getLogger(UserServicePersistentDao.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     public UserServicePersistentDao(List<User> users) {
         for (User user : users) {

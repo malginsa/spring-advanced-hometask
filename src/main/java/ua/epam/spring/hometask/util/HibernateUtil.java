@@ -11,7 +11,7 @@ public class HibernateUtil {
 
     // TODO make it tread-safe singleton
 
-    private static final Logger LOG = LogManager.getLogger(HibernateUtil.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     private static final EntityManagerFactory jPAsessionFactory =
             Persistence.createEntityManagerFactory("mysqlUnit");

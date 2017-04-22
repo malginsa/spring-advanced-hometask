@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Controller
 public class MainController {
 
-    private static final Logger LOG = LogManager.getLogger(MainController.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     @Autowired
     private EventService eventService;

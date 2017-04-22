@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestUserServiceDao {
 
-    private static final Logger LOG = LogManager.getLogger(TestUserServiceDao.class.getSimpleName());
+    private static final Logger LOG = LogManager.getLogger();
 
     private static AnnotationConfigApplicationContext ctx;
     private static UserServiceDao dao;
@@ -60,7 +60,6 @@ public class TestUserServiceDao {
 
     @Test
     public void testSave() {
-        LOG.error("hi there");
         uncleBob = dao.save(uncleBob);
         dao.remove(uncleBob);
 
