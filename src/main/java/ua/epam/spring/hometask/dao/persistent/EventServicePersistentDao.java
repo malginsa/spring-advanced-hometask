@@ -39,14 +39,12 @@ public class EventServicePersistentDao implements EventServiceDao {
 
     @Override
     public void remove(Event event) {
-        // TODO ? rafactor it, look AuditoriumServicePersistentDao.remove() as template
         EntityManager manager = HibernateUtil.getEntityManager();
         manager.getTransaction().begin();
         Event retrieved = manager.find(Event.class, event.getId());
         if (manager.contains(retrieved)) {
             manager.remove(retrieved);
         }
-//        manager.remove(manager.merge(event));
         manager.getTransaction().commit();
         manager.close();
     }
@@ -93,7 +91,7 @@ public class EventServicePersistentDao implements EventServiceDao {
         }
     }
 
-//    TODO replace method above with this. Test it
+//    TODO replace method above with this. And test it
 //    @Override
 //    public Optional<Event> getByName(String name) {
 //        EntityManager entityManager = HibernateUtil.getEntityManager();

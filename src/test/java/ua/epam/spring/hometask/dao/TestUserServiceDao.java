@@ -121,13 +121,10 @@ public class TestUserServiceDao {
         LocalDateTime dt = LocalDateTime.of(2017, 1, 11, 18, 0);
         mud.addAirDateTime(dt, coliseum);
         mud = eventService.save(mud);
-        eventService.remove(mud);
-        mud = eventService.save(mud);
         Ticket ticket = (new Ticket()).setDateTime(dt).setEvent(mud)
                 .setUser(timothy);
         bookingService.bookTickets(new HashSet<Ticket>(){{add(ticket);}});
         assertEquals(dao.getPurchasedTicketsForEvent(mud, dt).iterator().next(), ticket);
         eventService.remove(mud);
-//        TestUserServiceDao.close();
     }
 }

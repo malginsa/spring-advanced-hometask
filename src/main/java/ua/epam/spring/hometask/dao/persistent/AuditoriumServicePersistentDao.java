@@ -24,28 +24,20 @@ public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
         }
     }
 
-//    @Override
-//    public Auditorium save(Auditorium auditorium) {
-//        String name = auditorium.getName();
-//        Optional<Auditorium> opt = getByName(name);
-//        if (opt.isPresent()) {
-//            // not to save auditorium with the same name, according to equality contract
-//            return auditorium;
-//        }
-//        EntityManager manager = HibernateUtil.getEntityManager();
-//        manager.getTransaction().begin();
-//        Auditorium merged = manager.merge(auditorium);
-//        manager.getTransaction().commit();
-//        manager.close();
-//        return merged;
-//    }
-
     @Override
     public Auditorium save(Auditorium auditorium) {
+
+        // TODO isn't correct
+        Optional<Auditorium> byName = getByName(auditorium.getName());
+        if (byName.isPresent()) {
+            // not to save auditorium with the same name, according to equality contract
+            return byName.get();
+        }
+
         EntityManager manager = HibernateUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
-        tx.begin();
         Auditorium managed = null;
+        tx.begin();
         try {
             managed = manager.merge(auditorium); // auditorium will be persisted if it's in a transient state
             tx.commit();

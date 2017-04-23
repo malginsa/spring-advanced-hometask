@@ -13,6 +13,7 @@ import javax.persistence.EntityTransaction;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,9 +29,16 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public User save(User user) {
-        User managed = null;
+
+        Optional<User> equivalent = getEquivalent(user);
+        if (equivalent.isPresent()) {
+            // not to save the same user, "the same" according to equality contract
+            return equivalent.get();
+        }
+
         EntityManager manager = HibernateUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
+        User managed = null;
         tx.begin();
         try {
             managed = manager.merge(user); // user will be persisted if it's in a transient state
@@ -42,6 +50,30 @@ public class UserServicePersistentDao implements UserServiceDao {
             manager.close();
         }
         return managed;
+    }
+
+    private Optional<User> getEquivalent(User user) {
+        EntityManager manager = HibernateUtil.getEntityManager();
+        List<User> resultList = manager.createQuery(
+                "from User u "
+                        + "where u.firstName = :firstName"
+                        + " and u.lastName = :lastName"
+                        + " and u.email = :email"
+                        + " and u.bithday = :bithday"
+                , User.class)
+                .setParameter("firstName", user.getFirstName())
+                .setParameter("lastName", user.getLastName())
+                .setParameter("email", user.getEmail())
+                .setParameter("bithday", user.getBithday())
+                .getResultList();
+        manager.close();
+        if (resultList.size() > 1) {
+            LOG.warn("Multiple equivalent users found in DB " + user);
+        }
+        if (resultList.size() == 0) {
+            return Optional.empty();
+        }
+        return Optional.of(resultList.get(0));
     }
 
     @Override
@@ -58,8 +90,7 @@ public class UserServicePersistentDao implements UserServiceDao {
             return null;
         }
         if (resultList.size() > 1) {
-            LOG.warn("Multiple users with email = "
-                    + email + " found in DB ");
+            LOG.warn("Multiple users with email = " + email + " found in DB ");
         }
         return resultList.get(0);
     }
