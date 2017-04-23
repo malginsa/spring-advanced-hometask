@@ -30,7 +30,6 @@ public class TestUserAccountService {
         userAccountService = (UserAccountService) ctx.getBean("userAccountService");
         userService = (UserService) ctx.getBean("userService");
         marko = (User) ctx.getBean("marko");
-        marko.setAccount(new UserAccount(marko));
         marko = userService.save(marko);
     }
 

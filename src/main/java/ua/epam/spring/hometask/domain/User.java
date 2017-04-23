@@ -37,6 +37,7 @@ public class User extends DomainObject {
     public User() {
         roles = new HashSet<UserRole>();
         roles.add(UserRole.ROLE_REGISTERED_USER);
+        account = new UserAccount(this);
     }
 
     public String getFirstName() {
