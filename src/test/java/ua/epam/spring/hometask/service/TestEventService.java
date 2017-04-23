@@ -22,8 +22,7 @@ public class TestEventService {
         ctx = new AnnotationConfigApplicationContext(
                 AppConfig.class, AppConfigForTesting.class);
         ctx.scan("ua.epam.spring.hometask");
-        service = (EventService)
-                ctx.getBean("eventService");
+        service = (EventService) ctx.getBean("eventService");
     }
 
     @AfterClass

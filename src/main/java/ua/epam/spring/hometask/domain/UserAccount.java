@@ -15,6 +15,10 @@ public class UserAccount extends DomainObject {
     public UserAccount() {
     }
 
+    public UserAccount(User user) {
+        this.user = user;
+    }
+
     public User getUser() {
         return user;
     }
