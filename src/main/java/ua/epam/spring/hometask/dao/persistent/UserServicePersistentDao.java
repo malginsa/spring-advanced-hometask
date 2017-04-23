@@ -18,12 +18,30 @@ import java.util.stream.Collectors;
 
 public class UserServicePersistentDao implements UserServiceDao {
 
-    private static final Logger LOG = LogManager.getLogger();
+    private static final Logger LOG = LogManager.getLogger(UserServicePersistentDao.class);
 
     public UserServicePersistentDao(List<User> users) {
         for (User user : users) {
             save(user);
         }
+    }
+
+    @Override
+    public User save(User user) {
+        User managed = null;
+        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+        try {
+            managed = manager.merge(user); // user will be persisted if it's in a transient state
+            tx.commit();
+        } catch(Exception e) {
+            tx.rollback();
+            LOG.error(e);
+        } finally {
+            manager.close();
+        }
+        return managed;
     }
 
     @Override
@@ -44,24 +62,6 @@ public class UserServicePersistentDao implements UserServiceDao {
                     + email + " found in DB ");
         }
         return resultList.get(0);
-    }
-
-    @Override
-    public User save(User user) {
-        User managed = null;
-        EntityManager manager = HibernateUtil.getEntityManager();
-        EntityTransaction tx = manager.getTransaction();
-        tx.begin();
-        try {
-            managed = manager.merge(user); // user will be persisted if it's in a transient state
-            tx.commit();
-        } catch(Exception e) {
-            tx.rollback();
-            LOG.error(e);
-        } finally {
-            manager.close();
-        }
-        return managed;
     }
 
     @Override

@@ -42,7 +42,11 @@ public class EventServicePersistentDao implements EventServiceDao {
         // TODO ? rafactor it, look AuditoriumServicePersistentDao.remove() as template
         EntityManager manager = HibernateUtil.getEntityManager();
         manager.getTransaction().begin();
-        manager.remove(manager.merge(event));
+        Event retrieved = manager.find(Event.class, event.getId());
+        if (manager.contains(retrieved)) {
+            manager.remove(retrieved);
+        }
+//        manager.remove(manager.merge(event));
         manager.getTransaction().commit();
         manager.close();
     }

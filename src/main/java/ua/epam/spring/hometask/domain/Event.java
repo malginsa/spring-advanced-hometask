@@ -28,7 +28,8 @@ public class Event extends DomainObject {
     @Enumerated(EnumType.STRING)
     private EventRating rating;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Map<LocalDateTime, Auditorium> auditoriums;
 
     public Event() {

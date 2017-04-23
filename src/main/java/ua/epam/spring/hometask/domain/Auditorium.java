@@ -19,6 +19,7 @@ import java.util.stream.LongStream;
 @Proxy(lazy = false)
 public class Auditorium extends DomainObject {
 
+    // TODO naturalID
     private String name;
 
     private long numberOfSeats;

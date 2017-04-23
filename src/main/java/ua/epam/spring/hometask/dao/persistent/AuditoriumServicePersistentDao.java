@@ -42,12 +42,12 @@ public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
 
     @Override
     public Auditorium save(Auditorium auditorium) {
-        Auditorium managed = null;
         EntityManager manager = HibernateUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
+        Auditorium managed = null;
         try {
-            managed = manager.merge(auditorium); // event will be persisted if it's in a transient state
+            managed = manager.merge(auditorium); // auditorium will be persisted if it's in a transient state
             tx.commit();
         } catch(Exception e) {
             tx.rollback();

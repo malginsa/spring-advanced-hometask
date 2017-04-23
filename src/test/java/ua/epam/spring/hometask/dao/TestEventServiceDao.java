@@ -64,7 +64,7 @@ public class TestEventServiceDao {
         assertEquals(before + 1, after);
     }
 
-//    @Test
+    @Test
     public void testGetForDateRange() {
         fakel = (Auditorium) ctx.getBean("fakel");
         fakel = auditoriumServiceDao.save(fakel);

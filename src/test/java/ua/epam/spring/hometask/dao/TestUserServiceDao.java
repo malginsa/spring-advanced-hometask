@@ -9,7 +9,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import ua.epam.spring.hometask.AppConfigForTesting;
 import ua.epam.spring.hometask.config.AppConfig;
 import ua.epam.spring.hometask.domain.*;
+import ua.epam.spring.hometask.service.AuditoriumService;
 import ua.epam.spring.hometask.service.BookingService;
+import ua.epam.spring.hometask.service.EventService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +28,8 @@ public class TestUserServiceDao {
     private static User timothy;
     private static User uncleBob;
     private static BookingService bookingService;
+    private static AuditoriumService auditoriumService;
+    private static EventService eventService;
 
     @BeforeClass
     public static void init() {
@@ -34,6 +38,8 @@ public class TestUserServiceDao {
         ctx.scan("ua.epam.spring.hometask");
         dao = (UserServiceDao) ctx.getBean("userServiceDao");
         bookingService = (BookingService) ctx.getBean("bookingService");
+        auditoriumService = (AuditoriumService) ctx.getBean("auditoriumService");
+        eventService = (EventService) ctx.getBean("eventService");
 
         // timothy is stored into Persistance
         timothy = new User();
@@ -104,21 +110,24 @@ public class TestUserServiceDao {
         assertEquals(user, timothy);
     }
 
-    @Test
+//    @Test
     public void testGetPurchasedTicketsForEvent() {
-        Auditorium galeria = new Auditorium( "Galeria", 77,
-                new HashSet<Long>() {{
-                    add(3L);
-                }});
+        Auditorium coliseum = auditoriumService.getByName("Coliseum").get();
+        LOG.fatal(coliseum);
         Event mud = (new Event())
                 .setName("Mud")
                 .setRating(EventRating.MID)
                 .setBasePrice(17.);
         LocalDateTime dt = LocalDateTime.of(2017, 1, 11, 18, 0);
-        mud.addAirDateTime(dt, galeria);
+        mud.addAirDateTime(dt, coliseum);
+        mud = eventService.save(mud);
+        eventService.remove(mud);
+        mud = eventService.save(mud);
         Ticket ticket = (new Ticket()).setDateTime(dt).setEvent(mud)
                 .setUser(timothy);
         bookingService.bookTickets(new HashSet<Ticket>(){{add(ticket);}});
         assertEquals(dao.getPurchasedTicketsForEvent(mud, dt).iterator().next(), ticket);
+        eventService.remove(mud);
+//        TestUserServiceDao.close();
     }
 }

@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.service;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,11 +16,11 @@ import static org.junit.Assert.*;
 
 public class TestAuditoriumService {
 
-    ClassPathXmlApplicationContext ctx;
-    AuditoriumService service;
+    static ClassPathXmlApplicationContext ctx;
+    static AuditoriumService service;
 
-    @Before
-    public void initAuditoriumService() {
+    @BeforeClass
+    public static void initAuditoriumService() {
         AnnotationConfigApplicationContext ctx =
                 new AnnotationConfigApplicationContext(
                         AppConfig.class, AppConfigForTesting.class);
