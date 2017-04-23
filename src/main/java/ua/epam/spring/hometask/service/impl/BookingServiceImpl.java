@@ -65,11 +65,11 @@ public class BookingServiceImpl implements BookingService {
                 continue;
             }
             User user = ticket.getUser();
-            user.addTicket(ticket);
             double price = getTicketsPrice(ticket.getEvent(),
                 ticket.getDateTime(), user,
                 new HashSet<Long>() {{ add(1L); }});
             ticket.setPrice(price);
+            user.addTicket(ticket);
             userServiceDao.save(user);
         }
     }

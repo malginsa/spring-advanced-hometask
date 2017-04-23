@@ -27,7 +27,6 @@ public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
     @Override
     public Auditorium save(Auditorium auditorium) {
 
-        // TODO isn't correct
         Optional<Auditorium> byName = getByName(auditorium.getName());
         if (byName.isPresent()) {
             // not to save auditorium with the same name, according to equality contract

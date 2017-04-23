@@ -29,13 +29,6 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public User save(User user) {
-
-        Optional<User> equivalent = getEquivalent(user);
-        if (equivalent.isPresent()) {
-            // not to save the same user, "the same" according to equality contract
-            return equivalent.get();
-        }
-
         EntityManager manager = HibernateUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
         User managed = null;
