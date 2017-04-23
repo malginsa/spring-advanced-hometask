@@ -31,6 +31,9 @@ public class User extends DomainObject {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<UserRole> roles;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserAccount account;
+
     public User() {
         roles = new HashSet<UserRole>();
         roles.add(UserRole.ROLE_REGISTERED_USER);
@@ -97,6 +100,14 @@ public class User extends DomainObject {
     public User setRoles(Set<UserRole> roles) {
         this.roles = roles;
         return this;
+    }
+
+    public UserAccount getAccount() {
+        return account;
+    }
+
+    public void setAccount(UserAccount account) {
+        this.account = account;
     }
 
     public boolean addTicket(Ticket ticket) {

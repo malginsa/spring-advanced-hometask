@@ -19,11 +19,21 @@ import java.util.stream.Collectors;
 
 public class UserServicePersistentDao implements UserServiceDao {
 
-    private static final Logger LOG = LogManager.getLogger(UserServicePersistentDao.class);
+    private static final Logger LOG = LogManager.getLogger();
 
     public UserServicePersistentDao(List<User> users) {
         for (User user : users) {
-            save(user);
+            LOG.info("supposed to add user: "+ user);
+            // TODO why it isn't correct?
+//            Optional<User> equivalent = getEquivalent(user);
+//            if (!equivalent.isPresent()) {
+//            userByEmail - it's a development spike
+            User userByEmail = getUserByEmail(user.getEmail());
+            if (null == userByEmail) {
+                save(user);
+            } else {
+                LOG.warn("equivalent user is found in Persistence Context: " + user);
+            }
         }
     }
 
