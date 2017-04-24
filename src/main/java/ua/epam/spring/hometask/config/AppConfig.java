@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 //        LuckyWinnerAspect.class,
 //        SimpleDaoConfig.class,     // uses in-memory structures
         PersistentDaoConfig.class,  // uses persistent DB
+        JpaConfig.class
 })
 public class AppConfig {
 

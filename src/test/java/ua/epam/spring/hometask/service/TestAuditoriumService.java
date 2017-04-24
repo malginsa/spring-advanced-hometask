@@ -1,12 +1,11 @@
 package ua.epam.spring.hometask.service;
 
-import org.junit.Before;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.epam.spring.hometask.config.AppConfig;
 import ua.epam.spring.hometask.AppConfigForTesting;
+import ua.epam.spring.hometask.config.AppConfig;
 import ua.epam.spring.hometask.domain.Auditorium;
 
 import java.util.HashSet;
@@ -16,17 +15,20 @@ import static org.junit.Assert.*;
 
 public class TestAuditoriumService {
 
-    static ClassPathXmlApplicationContext ctx;
-    static AuditoriumService service;
+    private static AnnotationConfigApplicationContext ctx;
+    private static AuditoriumService service;
 
     @BeforeClass
     public static void initAuditoriumService() {
-        AnnotationConfigApplicationContext ctx =
-                new AnnotationConfigApplicationContext(
-                        AppConfig.class, AppConfigForTesting.class);
+        ctx = new AnnotationConfigApplicationContext(
+                AppConfig.class,
+                AppConfigForTesting.class);
         ctx.scan("ua.epam.spring.hometask");
-        service = (AuditoriumService)
-                ctx.getBean("auditoriumService");
+        service = (AuditoriumService) ctx.getBean("auditoriumService");
+    }
+
+    @AfterClass
+    public static void close() {
         ctx.close();
     }
 

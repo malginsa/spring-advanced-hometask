@@ -22,9 +22,8 @@ public class TestAuditoriumServiceDao {
     @BeforeClass
     public static void init() {
         ctx = new AnnotationConfigApplicationContext(
-                AppConfig.class
-                , AppConfigForTesting.class
-        );
+                AppConfig.class,
+                AppConfigForTesting.class);
         ctx.scan("ua.epam.spring.hometask");
         dao = (AuditoriumServiceDao) ctx.getBean("auditoriumServiceDao");
         fakel = (Auditorium) ctx.getBean("fakel");

@@ -12,6 +12,5 @@
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="ua.epam.spring.hometask"/>
-    <import resource="jpa-context.xml"/>
 
 </beans>

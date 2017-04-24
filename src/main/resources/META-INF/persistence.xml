@@ -8,13 +8,6 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>ua.epam.spring.hometask.domain.Event</class>
-        <class>ua.epam.spring.hometask.domain.Ticket</class>
-        <class>ua.epam.spring.hometask.domain.User</class>
-        <class>ua.epam.spring.hometask.domain.Auditorium</class>
-        <class>ua.epam.spring.hometask.domain.Counter</class>
-        <class>ua.epam.spring.hometask.domain.DomainObject</class>
-
         <properties>
             <property name="javax.persistence.jdbc.driver"
                       value="com.mysql.jdbc.Driver" />
@@ -51,13 +44,6 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>ua.epam.spring.hometask.domain.Event</class>
-        <class>ua.epam.spring.hometask.domain.Ticket</class>
-        <class>ua.epam.spring.hometask.domain.User</class>
-        <class>ua.epam.spring.hometask.domain.Auditorium</class>
-        <class>ua.epam.spring.hometask.domain.Counter</class>
-        <class>ua.epam.spring.hometask.domain.DomainObject</class>
-
         <properties>
             <property name="javax.persistence.jdbc.driver"
                       value="org.h2.Driver" />
@@ -93,13 +79,6 @@
     <persistence-unit name="derbyUnit">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
-        <class>ua.epam.spring.hometask.domain.Event</class>
-        <class>ua.epam.spring.hometask.domain.Ticket</class>
-        <class>ua.epam.spring.hometask.domain.User</class>
-        <class>ua.epam.spring.hometask.domain.Auditorium</class>
-        <class>ua.epam.spring.hometask.domain.Counter</class>
-        <class>ua.epam.spring.hometask.domain.DomainObject</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver"

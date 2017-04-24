@@ -13,6 +13,13 @@
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/movietheater?autoReconnect=true"/>
+        <property name="username" value="111"/>
+        <property name="password" value="222"/>
+    </bean>
+
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="mysqlUnit"/>
         <property name="dataSource" ref="dataSource"/>
@@ -35,14 +42,5 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
-
-    <!--<context:property-placeholder location="classpath:db.properties" />-->
-
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/movietheater?autoReconnect=true"/>
-        <property name="username" value="111"/>
-        <property name="password" value="222"/>
-    </bean>
 
 </beans>
