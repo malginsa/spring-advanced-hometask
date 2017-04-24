@@ -17,7 +17,7 @@ public interface UserAccountService {
      * @return persistent user after refilling
      */
     public User refill(@Nonnull User user,
-                       @Nonnull Float amount);
+                       @Nonnull double amount);
 
     /**
      * Withdraw money from user's account

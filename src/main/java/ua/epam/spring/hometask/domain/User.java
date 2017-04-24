@@ -13,6 +13,7 @@ import java.util.*;
 @Proxy(lazy = false)
 public class User extends DomainObject {
 
+    // TODO add field "login"
     private String firstName;
 
     private String lastName;

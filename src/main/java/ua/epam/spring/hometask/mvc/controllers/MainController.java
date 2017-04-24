@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +61,11 @@ public class MainController {
         return "login";
     }
 
+    @RequestMapping("/refill")
+    public String refill() {
+        return "refillForm";
+    }
+
     @RequestMapping("/mainMenu")
     public String mainMenu() {
         return "mainMenu";
@@ -91,8 +97,7 @@ public class MainController {
     }
 
     @RequestMapping("/loggedUserInfo")
-    private ModelAndView loggedUserInfo(
-    ) {
+    private ModelAndView loggedUserInfo() {
         org.springframework.security.core.userdetails.UserDetails principal =
                 (org.springframework.security.core.userdetails.UserDetails)
                         SecurityContextHolder.getContext()

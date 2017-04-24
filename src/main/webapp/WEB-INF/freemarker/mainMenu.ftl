@@ -11,6 +11,8 @@
 <a href="http://localhost:8080/logout">Log out</a><br>
 <a href="http://localhost:8080/login">Log in</a><br>
 <hr>
+<a href="http://localhost:8080/refill">Refill my account</a><br>
+<hr>
 <a href="http://localhost:8080/loggedUserInfo">Logged user info</a><br>
 <a href="http://localhost:8080/populateTestData">Populate Test Data</a><br>
 <hr>

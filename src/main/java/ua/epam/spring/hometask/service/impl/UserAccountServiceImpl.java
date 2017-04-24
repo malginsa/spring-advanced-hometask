@@ -19,7 +19,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public User refill(@Nonnull User user, @Nonnull Float amount) {
+    public User refill(@Nonnull User user, @Nonnull double amount) {
         User persistentUser = userService.getById(user.getId());
         UserAccount account = persistentUser.getAccount();
         account.setAmount(account.getAmount() + amount);
