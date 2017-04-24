@@ -2,6 +2,9 @@ package ua.epam.spring.hometask.dao.persistent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.UserServiceDao;
 import ua.epam.spring.hometask.domain.Event;
@@ -9,6 +12,7 @@ import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -17,11 +21,17 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component("userServiceDao")
 public class UserServicePersistentDao implements UserServiceDao {
 
     private static final Logger LOG = LogManager.getLogger();
 
-    public UserServicePersistentDao(List<User> users) {
+    private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    public UserServicePersistentDao(@Qualifier("predefined_users") List<User> users,
+                                    @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
         for (User user : users) {
             LOG.info("supposed to add user: "+ user);
             // TODO why it isn't correct?
@@ -39,7 +49,7 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public User save(User user) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();;
         EntityTransaction tx = manager.getTransaction();
         User managed = null;
         tx.begin();
@@ -56,7 +66,7 @@ public class UserServicePersistentDao implements UserServiceDao {
     }
 
     private Optional<User> getEquivalent(User user) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         List<User> resultList = manager.createQuery(
                 "from User u "
                         + "where u.firstName = :firstName"
@@ -81,7 +91,7 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public User getUserByEmail(String email) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         List<User> resultList = manager.createQuery(
                 "select u from User u " +
                         "where u.email = :email",
@@ -101,7 +111,7 @@ public class UserServicePersistentDao implements UserServiceDao {
     @Override
     public void remove(User user) {
         // TODO ? rafactor it, look AuditoriumServicePersistentDao.remove() as template
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
         manager.remove(manager.merge(user));
         manager.getTransaction().commit();
@@ -110,7 +120,7 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public User getById(Long id) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         User user = manager.find(User.class, id);
         manager.close();
         return user;
@@ -118,7 +128,7 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public Collection<User> getAllUsers() {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         List<User> resultList = manager.createQuery(
                 "from User", User.class).getResultList();
         manager.close();
@@ -127,7 +137,7 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public Long getUsersCount() {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         Long size = (Long) manager.createQuery("select count(*) from User")
                 .getSingleResult();
         manager.close();
@@ -136,7 +146,7 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public Set<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         Set<Ticket> tickets = manager.createQuery(
                 "select t from Ticket t "
                         + "join t.event e "
@@ -153,7 +163,7 @@ public class UserServicePersistentDao implements UserServiceDao {
 
     @Override
     public Collection<User> getUsersByName(String firstName) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         List<User> resultList = manager.createQuery(
                 "select u from User u " +
                         "where u.firstName = :firstName",

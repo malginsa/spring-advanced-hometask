@@ -77,14 +77,14 @@ public class BookingServiceImpl implements BookingService {
                 new HashSet<Long>() {{ add(1L); }});
             double availableAmount = userAccountService.getAmount(user);
             if (availableAmount < price) {
-                LOG.warn("unsufficient("+ availableAmount +") money for the price("+ price +")" +
+                LOG.error("unsufficient("+ availableAmount +") money for the price("+ price +")" +
                         "  user:" + user + "  ticket:" + ticket);
                 continue;
             }
-            userAccountService.withdraw(user, price);
+            user = userAccountService.withdraw(user, price);
             ticket.setPrice(price);
             user.addTicket(ticket);
-            userServiceDao.save(user);
+            user = userServiceDao.save(user);
         }
     }
 

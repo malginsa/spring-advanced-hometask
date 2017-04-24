@@ -13,14 +13,12 @@ public class HibernateUtil {
 
     private static final Logger LOG = LogManager.getLogger();
 
-    private static final EntityManagerFactory entityManagerFactory =
-            Persistence.createEntityManagerFactory("mysqlUnit");
+    private static EntityManagerFactory entityManagerFactory;
+//            = Persistence.createEntityManagerFactory("mysqlUnit");
 
-//    public static EntityManagerFactory entityManagerFactory;
-
-//    public static void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-//        HibernateUtil.entityManagerFactory = entityManagerFactory;
-//    }
+    public static void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+        HibernateUtil.entityManagerFactory = entityManagerFactory;
+    }
 
     public static EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();

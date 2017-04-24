@@ -36,10 +36,10 @@ public class AppConfig {
         return new AuditoriumServicePersistentDao(auditoriums());
     }
 
-    @Bean
-    public UserServiceDao userServiceDao() {
-        return new UserServicePersistentDao(users());
-    }
+//    @Bean
+//    public UserServiceDao userServiceDao() {
+//        return new UserServicePersistentDao(users());
+//    }
 
     @Bean
     public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
@@ -110,7 +110,8 @@ public class AppConfig {
     @Resource(name = "userPropsBean")
     private Map<String, String> userProps;
 
-    public List<User> users() {
+    @Bean()
+    public List<User> predefined_users() {
 
         Set<String> prefixes = userProps
                 .keySet()
