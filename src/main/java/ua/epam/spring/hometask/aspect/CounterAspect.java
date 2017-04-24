@@ -59,7 +59,7 @@ public class CounterAspect {
     }
 
 
-    @Before("execution(* *.getBasePrice()) && within(*..Event)")
+    @Before("execution(* *.getTicketPrice()) && within(*..Event)")
     public void countGetBasePriceMethod(JoinPoint jp) {
         Event event = (Event) jp.getTarget();
         String name = event.getName();

@@ -27,10 +27,10 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public User withdraw(@Nonnull User user, @Nonnull Float amount) {
+    public User withdraw(@Nonnull User user, @Nonnull double amount) {
         User persistentUser = userService.getById(user.getId());
         UserAccount account = persistentUser.getAccount();
-        float accountAmount = account.getAmount();
+        double accountAmount = account.getAmount();
         if (accountAmount < amount) {
             throw new IllegalArgumentException("not enough money for withdrawal");
         }
@@ -39,7 +39,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public Float getAmount(@Nonnull User user) {
+    public double getAmount(@Nonnull User user) {
         User persistentUser = userService.getById(user.getId());
         return persistentUser.getAccount().getAmount();
     }

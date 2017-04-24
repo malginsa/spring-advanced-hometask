@@ -25,7 +25,7 @@ public interface UserAccountService {
      * @param amount how much money should be withdrawal from account
      */
     public User withdraw(@Nonnull User user,
-                         @Nonnull Float amount)
+                         @Nonnull double amount)
             throws IllegalArgumentException;
 
     /**
@@ -33,5 +33,5 @@ public interface UserAccountService {
      * @param user user with his account
      * @return amount of money
      */
-    public Float getAmount(@Nonnull User user);
+    public double getAmount(@Nonnull User user);
 }

@@ -10,7 +10,7 @@ public class UserAccount extends DomainObject {
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
-    private float amount;
+    private double amount;
 
     public UserAccount() {
     }
@@ -27,11 +27,11 @@ public class UserAccount extends DomainObject {
         this.user = user;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 }

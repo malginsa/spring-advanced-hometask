@@ -136,7 +136,7 @@ public class MainController {
         Event mud = (new Event())
                 .setName("Mud")
                 .setRating(EventRating.MID)
-                .setBasePrice(17.50);
+                .setTicketPrice(17.50);
         mud.addAirDateTime(
                 LocalDateTime.of(2017, 1, 11, 18, 0),
                 auditoriumService.getByName("Aurora").get());

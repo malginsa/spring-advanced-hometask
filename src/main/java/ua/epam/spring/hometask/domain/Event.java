@@ -23,7 +23,8 @@ public class Event extends DomainObject {
     // TODO
 //    private SortedSet<LocalDateTime> airDates;
 
-    private double basePrice;
+    // base price, users can have discount
+    private double ticketPrice;
 
     @Enumerated(EnumType.STRING)
     private EventRating rating;
@@ -173,12 +174,12 @@ public class Event extends DomainObject {
         return this;
     }
 
-    public double getBasePrice() {
-        return basePrice;
+    public double getTicketPrice() {
+        return ticketPrice;
     }
 
-    public Event setBasePrice(double basePrice) {
-        this.basePrice = basePrice;
+    public Event setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
         return this;
     }
 
@@ -236,7 +237,7 @@ public class Event extends DomainObject {
         return "Event{" +
                 "name='" + name + '\'' +
                 ", airDates=" + airDates +
-                ", basePrice=" + basePrice +
+                ", ticketPrice=" + ticketPrice +
                 ", rating=" + rating +
                 ", auditoriums=" + auditoriums +
                 '}';

@@ -118,7 +118,7 @@ public class TestUserServiceDao {
         Event mud = (new Event())
                 .setName("Mud")
                 .setRating(EventRating.MID)
-                .setBasePrice(17.);
+                .setTicketPrice(17.);
         LocalDateTime dt = LocalDateTime.of(2017, 1, 11, 18, 0);
         mud.addAirDateTime(dt, coliseum);
         mud = eventService.save(mud);

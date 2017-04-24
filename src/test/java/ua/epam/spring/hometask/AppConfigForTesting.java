@@ -64,7 +64,7 @@ public class AppConfigForTesting {
     public Event jPoint() {
         Event event = new Event();
         event.setName("JPoint");
-        event.setBasePrice(19d);
+        event.setTicketPrice(19d);
         event.setRating(EventRating.HIGH);
         return event;
     }
@@ -73,7 +73,7 @@ public class AppConfigForTesting {
     public Event millenium() {
         Event event = new Event();
         event.setName("Millenium");
-        event.setBasePrice(10d);
+        event.setTicketPrice(10d);
         event.setRating(EventRating.MID);
         return event;
     }

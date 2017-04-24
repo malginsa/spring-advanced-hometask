@@ -9,7 +9,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import ua.epam.spring.hometask.AppConfigForTesting;
 import ua.epam.spring.hometask.config.AppConfig;
 import ua.epam.spring.hometask.domain.User;
-import ua.epam.spring.hometask.domain.UserAccount;
 
 import static org.junit.Assert.assertEquals;
 
@@ -41,19 +40,19 @@ public class TestUserAccountService {
 
     @Test
     public void testRefill() {
-        Float before = userAccountService.getAmount(marko);
+        double before = userAccountService.getAmount(marko);
         marko = userAccountService.refill(marko, 100f);
-        Float after = userAccountService.getAmount(marko);
+        double after = userAccountService.getAmount(marko);
         assertEquals(after - before, 100f, 0.000001);
     }
 
     @Test
     public void testWithdraw() {
         marko = userAccountService.refill(marko, 100f);
-        Float before = userAccountService.getAmount(marko);
+        double before = userAccountService.getAmount(marko);
         marko = userAccountService.withdraw(marko, 7f);
         marko = userService.save(marko);
-        Float after = userAccountService.getAmount(marko);
+        double after = userAccountService.getAmount(marko);
         assertEquals(before - after, 7f, 0.000001);
     }
 }

@@ -58,7 +58,7 @@ public class EventController {
                 String[] line = csvReader.readNext();
                 Event event = (new Event())
                         .setName(line[0])
-                        .setBasePrice(Double.parseDouble(line[2]))
+                        .setTicketPrice(Double.parseDouble(line[2]))
                         .setRating(EventRating.valueOf(line[3]));
                 eventService.save(event);
             }

@@ -57,7 +57,7 @@ public class TestCounterAspect {
     public void testGetBasePrice() {
         Event event = (Event) ctx.getBean("jPoint");
         int before = counterAspect.getCounterByPrice(event.getName());
-        event.getBasePrice();
+        event.getTicketPrice();
         int after = counterAspect.getCounterByPrice(event.getName());
         assertEquals(before + 1, after);
     }
