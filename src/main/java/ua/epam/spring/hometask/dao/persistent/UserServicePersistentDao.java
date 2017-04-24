@@ -29,7 +29,7 @@ public class UserServicePersistentDao implements UserServiceDao {
     private EntityManagerFactory entityManagerFactory;
 
     @Autowired
-    public UserServicePersistentDao(@Qualifier("predefined_users") List<User> users,
+    public UserServicePersistentDao(@Qualifier("predefinedUsers") List<User> users,
                                     @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
         for (User user : users) {

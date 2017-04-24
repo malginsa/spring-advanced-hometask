@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.AuditoriumServiceDao;
 import ua.epam.spring.hometask.domain.Auditorium;
@@ -17,11 +18,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Component("auditoriumServiceDao")
 public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
 
     private static final Logger LOG = LogManager.getLogger();
 
-    public AuditoriumServicePersistentDao(List<Auditorium> auditoriums) {
+    private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    public AuditoriumServicePersistentDao(
+            @Qualifier("predefinedAuditoriums") List<Auditorium> auditoriums,
+            @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory)
+    {
+        this.entityManagerFactory = entityManagerFactory;
         for (Auditorium auditorium : auditoriums) {
             save(auditorium);
         }
@@ -36,7 +45,7 @@ public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
             return byName.get();
         }
 
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         Auditorium managed = null;
         tx.begin();
@@ -54,7 +63,7 @@ public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
 
     @Override
     public Optional<Auditorium> getByName(String name) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         List<Auditorium> resultList = manager.createQuery(
                 "from Auditorium A where A.name = :name",
                 Auditorium.class)
@@ -73,7 +82,7 @@ public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
 
     @Override
     public Set<Auditorium> getAll() {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         TypedQuery<Auditorium> query = manager.createQuery(
                 "from Auditorium", Auditorium.class);
         List<Auditorium> list = query.getResultList();
@@ -83,7 +92,7 @@ public class AuditoriumServicePersistentDao implements AuditoriumServiceDao {
 
     @Override
     public boolean remove(Auditorium auditorium) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
         Auditorium retrieved = manager.find(Auditorium.class, auditorium.getId());
         if (manager.contains(retrieved)) {

@@ -7,10 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
-import ua.epam.spring.hometask.dao.AuditoriumServiceDao;
-import ua.epam.spring.hometask.dao.UserServiceDao;
-import ua.epam.spring.hometask.dao.persistent.AuditoriumServicePersistentDao;
-import ua.epam.spring.hometask.dao.persistent.UserServicePersistentDao;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.domain.UserRole;
@@ -30,16 +26,6 @@ import java.util.stream.Collectors;
         JpaConfig.class
 })
 public class AppConfig {
-
-    @Bean
-    public AuditoriumServiceDao auditoriumServiceDao() {
-        return new AuditoriumServicePersistentDao(auditoriums());
-    }
-
-//    @Bean
-//    public UserServiceDao userServiceDao() {
-//        return new UserServicePersistentDao(users());
-//    }
 
     @Bean
     public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
@@ -66,7 +52,8 @@ public class AppConfig {
     private Map<String, String> auditoriumProps;
 
 //    TODO refactor auditoriums() and users() using lambda
-    public List<Auditorium> auditoriums() {
+    @Bean()
+    public List<Auditorium> predefinedAuditoriums() {
 
         Set<String> prefixes = auditoriumProps
                 .keySet()
@@ -111,7 +98,7 @@ public class AppConfig {
     private Map<String, String> userProps;
 
     @Bean()
-    public List<User> predefined_users() {
+    public List<User> predefinedUsers() {
 
         Set<String> prefixes = userProps
                 .keySet()
