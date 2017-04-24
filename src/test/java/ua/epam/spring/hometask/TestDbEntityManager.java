@@ -2,16 +2,11 @@ package ua.epam.spring.hometask;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.epam.spring.hometask.config.AppConfig;
 import ua.epam.spring.hometask.config.JpaConfig;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
-import ua.epam.spring.hometask.service.AuditoriumService;
 import ua.epam.spring.hometask.util.HibernateUtil;
 
 import javax.persistence.EntityManager;

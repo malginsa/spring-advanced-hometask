@@ -4,14 +4,11 @@ import com.mchange.v2.c3p0.DriverManagerDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import ua.epam.spring.hometask.util.HibernateUtil;
 
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.spi.PersistenceUnitInfo;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -21,7 +18,6 @@ public class JpaConfig {
 
     @Bean
     public EntityManagerFactory entityManagerFactory() {
-//        new HibernatePersistenceProvider().createContainerEntityManagerFactory();
         LocalContainerEntityManagerFactoryBean manager = new LocalContainerEntityManagerFactoryBean();
         manager.setDataSource(dataSource());
         manager.setPackagesToScan(new String[] { "ua.epam.spring.hometask.domain" });
@@ -30,8 +26,8 @@ public class JpaConfig {
         manager.setPersistenceUnitName("mysqlUnit");
         manager.setPersistenceProvider(new HibernatePersistenceProvider());
         manager.afterPropertiesSet();
-        HibernateUtil.entityManagerFactory = manager.getObject();
-        return manager.getObject();
+        HibernateUtil.setEntityManagerFactory(manager.getNativeEntityManagerFactory());
+        return manager.getNativeEntityManagerFactory();
     }
 
     @Bean

@@ -2,11 +2,14 @@ package ua.epam.spring.hometask.dao.persistent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.AuditoriumServiceDao;
 import ua.epam.spring.hometask.domain.Auditorium;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.HashSet;
