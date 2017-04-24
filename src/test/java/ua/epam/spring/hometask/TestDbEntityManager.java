@@ -7,7 +7,6 @@ import ua.epam.spring.hometask.config.JpaConfig;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.EventRating;
-import ua.epam.spring.hometask.util.HibernateUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,7 +38,7 @@ public class TestDbEntityManager {
     public void testPersistAndObtain() {
         Auditorium breslau = new Auditorium("Breslau", 10,
                 new HashSet<Long>() {{ add(1L); add(2L); }});
-        EntityManager entityManager = HibernateUtil.getEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         int before = entityManager.createQuery("from Auditorium", Auditorium.class)
@@ -56,7 +55,7 @@ public class TestDbEntityManager {
 
 //    @Test
     public void testObtain() {
-        EntityManager entityManager = HibernateUtil.getEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         List<Auditorium> result = entityManager
                 .createQuery( "from Auditorium", Auditorium.class )
@@ -68,7 +67,7 @@ public class TestDbEntityManager {
 
 //    @Test
     public void testPersistEvent() {
-        EntityManager entityManager = HibernateUtil.getEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Event event = new Event();
         event.setName("weekend");

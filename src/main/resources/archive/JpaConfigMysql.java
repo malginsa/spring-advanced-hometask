@@ -1,4 +1,4 @@
-package ua.epam.spring.hometask.config;
+package archive;
 
 import com.mchange.v2.c3p0.DriverManagerDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -16,13 +16,13 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-public class JpaConfig {
+public class JpaConfigMysql {
 
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClass("javax.persistence.jdbc.driver");
-        dataSource.setJdbcUrl("jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE");
+        dataSource.setDriverClass("com.mysql.jdbc.Driver");
+        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/movietheater?useSSL=false");
         dataSource.setUser("111");
         dataSource.setPassword("222");
         return dataSource;
@@ -42,7 +42,7 @@ public class JpaConfig {
         manager.setPackagesToScan(new String[]{"ua.epam.spring.hometask.domain"});
         manager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         manager.setJpaProperties(JpaProperties());
-        manager.setPersistenceUnitName("movieTheater");
+        manager.setPersistenceUnitName("mysqlUnit");
         manager.setPersistenceProvider(new HibernatePersistenceProvider());
         manager.afterPropertiesSet();
         EntityManagerFactory factory = manager.getNativeEntityManagerFactory();

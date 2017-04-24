@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.EventServiceDao;
 import ua.epam.spring.hometask.domain.Event;
 

@@ -41,7 +41,7 @@ public class AppConfig {
         return ppc;
     }
 
-    @Bean()
+    @Bean
     public static PropertiesFactoryBean auditoriumPropsBean() {
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
         bean.setLocation(new ClassPathResource("auditorium.properties"));
@@ -52,7 +52,7 @@ public class AppConfig {
     private Map<String, String> auditoriumProps;
 
 //    TODO refactor auditoriums() and users() using lambda
-    @Bean()
+    @Bean
     public List<Auditorium> predefinedAuditoriums() {
 
         Set<String> prefixes = auditoriumProps
@@ -87,7 +87,7 @@ public class AppConfig {
         return res;
     }
 
-    @Bean()
+    @Bean
     public static PropertiesFactoryBean userPropsBean() {
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
         bean.setLocation(new ClassPathResource("user.properties"));
@@ -97,7 +97,7 @@ public class AppConfig {
     @Resource(name = "userPropsBean")
     private Map<String, String> userProps;
 
-    @Bean()
+    @Bean
     public List<User> predefinedUsers() {
 
         Set<String> prefixes = userProps

@@ -2,12 +2,12 @@ package ua.epam.spring.hometask.dao.persistent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.CounterDao;
 import ua.epam.spring.hometask.domain.Counter;
 import ua.epam.spring.hometask.domain.CounterType;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,15 +18,17 @@ public class CounterPersistentDao implements CounterDao {
 
     private AtomicInteger countValue;
     private CounterType counterType;
+    private EntityManagerFactory entityManagerFactory;
 
-    public CounterPersistentDao(CounterType counterType) {
+    public CounterPersistentDao(CounterType counterType,
+                                EntityManagerFactory entityManagerFactory) {
         this.counterType = counterType;
         countValue = new AtomicInteger();
     }
 
     @Override
     public int getCounter(String name) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         List<Counter> resultList = manager.createQuery(
                 "from Counter C where C.name = :name " +
                         "and C.counterType = :counterType",
@@ -50,7 +52,7 @@ public class CounterPersistentDao implements CounterDao {
     public void incCounter(String name) {
         int currentValue = getCounter(name);
         if (0 == currentValue) { // a new counter
-            EntityManager manager = HibernateUtil.getEntityManager();
+            EntityManager manager = entityManagerFactory.createEntityManager();
             manager.getTransaction().begin();
             manager.persist(
                     (new Counter())
@@ -62,7 +64,7 @@ public class CounterPersistentDao implements CounterDao {
             return;
         }
         int newValue = currentValue + 1;
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
         Query query = manager.createQuery(
                 "update Counter c " +
