@@ -3,20 +3,11 @@ package ua.epam.spring.hometask.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ua.epam.spring.hometask.dao.CounterDao;
-import ua.epam.spring.hometask.dao.EventServiceDao;
-import ua.epam.spring.hometask.dao.UserServiceDao;
 import ua.epam.spring.hometask.dao.persistent.CounterPersistentDao;
-import ua.epam.spring.hometask.dao.persistent.EventServicePersistentDao;
-import ua.epam.spring.hometask.dao.persistent.UserServicePersistentDao;
 import ua.epam.spring.hometask.domain.CounterType;
 
 @Configuration
 public class PersistentDaoConfig {
-
-    @Bean
-    public EventServiceDao eventServiceDao() {
-        return new EventServicePersistentDao();
-    }
 
     @Bean
     public CounterDao counterGetByNameDao() {

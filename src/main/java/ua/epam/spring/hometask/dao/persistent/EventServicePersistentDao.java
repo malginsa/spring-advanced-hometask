@@ -2,12 +2,16 @@ package ua.epam.spring.hometask.dao.persistent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ua.epam.spring.hometask.util.HibernateUtil;
 import ua.epam.spring.hometask.dao.EventServiceDao;
 import ua.epam.spring.hometask.domain.Event;
 
 import javax.annotation.Nonnull;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.util.List;
@@ -15,14 +19,23 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component("eventServiceDao")
 public class EventServicePersistentDao implements EventServiceDao {
 
     private static final Logger LOG = LogManager.getLogger();
 
+    private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    public EventServicePersistentDao(@Qualifier("entityManagerFactory")
+                                                 EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
+
     @Override
     public Event save(Event event) {
         Event managed = null;
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
         try {
@@ -39,7 +52,7 @@ public class EventServicePersistentDao implements EventServiceDao {
 
     @Override
     public void remove(Event event) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
         Event retrieved = manager.find(Event.class, event.getId());
         if (manager.contains(retrieved)) {
@@ -51,7 +64,7 @@ public class EventServicePersistentDao implements EventServiceDao {
 
     @Override
     public Event getById(Long id) {
-        EntityManager entityManager = HibernateUtil.getEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         Event event = entityManager.find(Event.class, id);
         entityManager.close();
         return event;
@@ -59,7 +72,7 @@ public class EventServicePersistentDao implements EventServiceDao {
 
     @Override
     public List<Event> getAll() {
-        EntityManager entityManager = HibernateUtil.getEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Event> resultList = entityManager.createQuery(
                 "from Event", Event.class).getResultList();
         entityManager.close();
@@ -68,7 +81,7 @@ public class EventServicePersistentDao implements EventServiceDao {
 
     @Override
     public Optional<Event> getByName(String name) {
-        EntityManager entityManager = HibernateUtil.getEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             List<Event> resultList = entityManager.createQuery(
                     "select e from Event e where e.name = :name", Event.class)
@@ -94,7 +107,7 @@ public class EventServicePersistentDao implements EventServiceDao {
 //    TODO replace method above with this. And test it
 //    @Override
 //    public Optional<Event> getByName(String name) {
-//        EntityManager entityManager = HibernateUtil.getEntityManager();
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
 //        Optional<Event> event = entityManager
 //                .unwrap(Session.class)
 //                .byNaturalId(Event.class)
@@ -107,7 +120,7 @@ public class EventServicePersistentDao implements EventServiceDao {
     @Nonnull
     @Override
     public Set<Event> getForDateRange(@Nonnull LocalDate from, @Nonnull LocalDate to) {
-        EntityManager manager = HibernateUtil.getEntityManager();
+        EntityManager manager = entityManagerFactory.createEntityManager();
         Set<Event> events = manager.createQuery(
                 "select e from Event e " +
                         "join e.airDates ad " +
