@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ua.epam.spring.hometask.dao.UserServiceDao;
 import ua.epam.spring.hometask.domain.*;
 import ua.epam.spring.hometask.service.BookingService;
@@ -22,10 +24,14 @@ public class BookingServiceImpl implements BookingService {
 
     private static final Logger LOG = LogManager.getLogger();
 
-    /** VIP seat costs more than ordinary in how many */
+    /**
+     * VIP seat costs more than ordinary in how many
+     */
     public static final double VIP_FACTOR = 2;
 
-    /** price for HIGH rated event costs more than ordinary in how many */
+    /**
+     * price for HIGH rated event costs more than ordinary in how many
+     */
     public static final double HIGH_RATED_FACTOR = 1.2;
 
     private DiscountService discountService;
@@ -66,25 +72,35 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void bookTickets(@Nonnull Set<Ticket> tickets) {
-        for (Ticket ticket : tickets) {
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            readOnly = false,
+            rollbackFor = InsufficientMoneyException.class)
+//    Either all the Tickets will be booked or no one.
+
+    public void bookTickets(@Nonnull Set<Ticket> tickets)
+            throws InsufficientMoneyException {
+
+        for (Ticket ticket : tickets) { // TODO refactor it using stream
             if (null == ticket) {
                 continue;
             }
             User user = ticket.getUser();
             double price = getTicketsPrice(ticket.getEvent(),
-                ticket.getDateTime(), user,
-                new HashSet<Long>() {{ add(1L); }});
+                    ticket.getDateTime(), user,
+                    new HashSet<Long>() {{
+                        add(1L);
+                    }});
             double availableAmount = userAccountService.getAmount(user);
             if (availableAmount < price) {
-                LOG.error("unsufficient("+ availableAmount +") money for the price("+ price +")" +
+                LOG.error("unsufficient(" + availableAmount + ") money for the price(" + price + ")" +
                         "  user:" + user + "  ticket:" + ticket);
-                continue;
+                throw new InsufficientMoneyException();
             }
             user = userAccountService.withdraw(user, price);
             ticket.setPrice(price);
             user.addTicket(ticket);
-            user = userServiceDao.save(user);
+            userServiceDao.save(user);
         }
     }
 

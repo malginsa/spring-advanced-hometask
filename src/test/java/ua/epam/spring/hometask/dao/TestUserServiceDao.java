@@ -12,6 +12,7 @@ import ua.epam.spring.hometask.domain.*;
 import ua.epam.spring.hometask.service.AuditoriumService;
 import ua.epam.spring.hometask.service.BookingService;
 import ua.epam.spring.hometask.service.EventService;
+import ua.epam.spring.hometask.service.impl.InsufficientMoneyException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -112,7 +113,7 @@ public class TestUserServiceDao {
     }
 
 //    @Test
-    public void testGetPurchasedTicketsForEvent() {
+    public void testGetPurchasedTicketsForEvent() throws InsufficientMoneyException {
         Auditorium coliseum = auditoriumService.getByName("Coliseum").get();
         LOG.fatal(coliseum);
         Event mud = (new Event())

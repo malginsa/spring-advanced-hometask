@@ -34,7 +34,7 @@ public class UserServicePersistentDao implements UserServiceDao {
         this.entityManagerFactory = entityManagerFactory;
         for (User user : users) {
             LOG.info("supposed to add user: "+ user);
-            // TODO why it isn't correct?
+            // TODO why it isn't correct? I suppose because null(in java) doesn't equal NULL(in DB)
 //            Optional<User> equivalent = getEquivalent(user);
 //            if (!equivalent.isPresent()) {
 //            userByEmail - it's a development spike

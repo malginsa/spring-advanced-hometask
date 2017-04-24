@@ -15,6 +15,7 @@ import ua.epam.spring.hometask.service.AuditoriumService;
 import ua.epam.spring.hometask.service.BookingService;
 import ua.epam.spring.hometask.service.EventService;
 import ua.epam.spring.hometask.service.UserService;
+import ua.epam.spring.hometask.service.impl.InsufficientMoneyException;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -70,10 +71,15 @@ public class BookingController {
                         .setDateTime(localDateTime)
                         .setSeat(s))
                 .collect(Collectors.toSet());
-        bookingService.bookTickets(tickets);
         ModelAndView mav = new ModelAndView("simplePage");
-        mav.addObject("title", "Tickets are successfully booked");
-        mav.addObject("message", "");
+        try {
+            bookingService.bookTickets(tickets);
+            mav.addObject("title", "Tickets are successfully booked");
+            mav.addObject("message", "");
+        } catch (InsufficientMoneyException e) {
+            mav.addObject("title", "Tickets are NOT successfully booked");
+            mav.addObject("message", e.getMessage());
+        }
         return mav;
     }
 

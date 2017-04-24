@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.service.impl.InsufficientMoneyException;
 
 /**
  * @author Yuriy_Tkach
@@ -37,7 +38,7 @@ public interface BookingService {
      *
      * @param tickets Set of tickets
      */
-    public void bookTickets(@Nonnull Set<Ticket> tickets);
+    public void bookTickets(@Nonnull Set<Ticket> tickets) throws InsufficientMoneyException;
 
     /**
      * Getting all purchased tickets for event on specific air date and time

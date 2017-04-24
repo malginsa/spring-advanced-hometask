@@ -8,6 +8,7 @@ import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.BookingService;
+import ua.epam.spring.hometask.service.impl.InsufficientMoneyException;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -18,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class TestLuckyWinnerAspect {
 
 //    @Test
-    public void testLuckyWinnerAspect() {
+    public void testLuckyWinnerAspect() throws InsufficientMoneyException {
 
         AnnotationConfigApplicationContext ctx =
                 new AnnotationConfigApplicationContext(

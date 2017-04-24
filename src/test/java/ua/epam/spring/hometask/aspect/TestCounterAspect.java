@@ -11,6 +11,7 @@ import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.BookingService;
 import ua.epam.spring.hometask.service.EventService;
+import ua.epam.spring.hometask.service.impl.InsufficientMoneyException;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -63,7 +64,7 @@ public class TestCounterAspect {
     }
 
 //    @Test
-    public void testBookTickets() {
+    public void testBookTickets() throws InsufficientMoneyException {
         Auditorium fakel = (Auditorium) ctx.getBean("fakel");
         User marko = (User) ctx.getBean("marko");
         Event event = (Event) ctx.getBean("jPoint");
