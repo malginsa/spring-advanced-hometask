@@ -1,16 +1,31 @@
 package ua.epam.spring.hometask.domain;
 
 import org.hibernate.annotations.Proxy;
+import ua.epam.spring.hometask.ws.adapter.LocalDateAdapter;
 
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * @author Yuriy_Tkach
  */
 @Entity
 @Proxy(lazy = false)
+@XmlType(name = "User")
 public class User extends DomainObject {
 
     // TODO add field "login"
@@ -32,7 +47,8 @@ public class User extends DomainObject {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<UserRole> roles;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private UserAccount account;
 
     public User() {
@@ -77,6 +93,8 @@ public class User extends DomainObject {
         return this;
     }
 
+    @XmlAttribute(required = true)
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBithday() {
         return bithday;
     }

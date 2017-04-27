@@ -88,7 +88,7 @@ public class UserController {
             throw new Exception("Uploading service unavailable, please contact administrator");
         }
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // TODO use predefined fotmat
         try (FileReader fileReader = new FileReader(localFile);
                CSVReader csvReader = new CSVReader(fileReader)) {
             while (csvReader.readNext() != null) {
