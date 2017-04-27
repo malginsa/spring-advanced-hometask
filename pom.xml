@@ -16,6 +16,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.7.RELEASE</spring.version>
         <spring-security.version>4.2.2.RELEASE</spring-security.version>
+        <spring-ws-core.version>2.3.1.RELEASE</spring-ws-core.version>
+        <wsdl4j.version>1.6.3</wsdl4j.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <javaee-api.version>7.0</javaee-api.version>
         <jstl.version>1.2</jstl.version>
@@ -168,6 +170,18 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-core</artifactId>
+            <version>${spring-ws-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>${wsdl4j.version}</version>
         </dependency>
 
         <dependency>
