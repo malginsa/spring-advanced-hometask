@@ -17,7 +17,7 @@
         <spring.version>4.3.7.RELEASE</spring.version>
         <spring-security.version>4.2.2.RELEASE</spring-security.version>
         <spring-ws-core.version>2.3.1.RELEASE</spring-ws-core.version>
-        <spring-boot-starter-ws.version>1.4.6.RELEASE</spring-boot-starter-ws.version>
+        <!--<spring-boot-starter-ws.version>1.4.6.RELEASE</spring-boot-starter-ws.version>-->
         <wsdl4j.version>1.6.3</wsdl4j.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <javaee-api.version>7.0</javaee-api.version>
@@ -105,6 +105,25 @@
                 <version>${jetty-maven-plugin.version}</version>
             </plugin>
 
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -179,11 +198,11 @@
             <version>${spring-ws-core.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-ws</artifactId>
-            <version>${spring-boot-starter-ws.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-ws</artifactId>-->
+            <!--<version>${spring-boot-starter-ws.version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>wsdl4j</groupId>
