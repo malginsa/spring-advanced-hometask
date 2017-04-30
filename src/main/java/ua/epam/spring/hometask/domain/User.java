@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -25,14 +25,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @Entity
 @Proxy(lazy = false)
-@XmlType(name = "User")
+//@XmlRootElement
 public class User extends DomainObject {
 
     // TODO add field "login"
+
+    @XmlElement(required = true)
     private String firstName;
 
+    @XmlElement(required = false)
     private String lastName;
 
+    @XmlElement(required = false)
     private String email;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -40,11 +44,14 @@ public class User extends DomainObject {
     @OrderBy("dateTime")
     private SortedSet<Ticket> tickets = new TreeSet<>();
 
+    @XmlElement(required = false)
     private LocalDate bithday;
 
+    @XmlElement(required = false)
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @XmlElement(required = false)
     private Set<UserRole> roles;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER,

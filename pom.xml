@@ -17,7 +17,7 @@
         <spring.version>4.3.7.RELEASE</spring.version>
         <spring-security.version>4.2.2.RELEASE</spring-security.version>
         <spring-ws-core.version>2.3.1.RELEASE</spring-ws-core.version>
-        <!--<spring-boot-starter-ws.version>1.4.6.RELEASE</spring-boot-starter-ws.version>-->
+        <spring-boot-starter-ws.version>1.4.6.RELEASE</spring-boot-starter-ws.version>
         <wsdl4j.version>1.6.3</wsdl4j.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <javaee-api.version>7.0</javaee-api.version>
@@ -119,7 +119,7 @@
                 </executions>
                 <configuration>
                     <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
-                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <outputDirectory>${project.basedir}/src/main/java/ua/epam/spring/hometask/domain/sample</outputDirectory>
                     <clearOutputDir>false</clearOutputDir>
                 </configuration>
             </plugin>

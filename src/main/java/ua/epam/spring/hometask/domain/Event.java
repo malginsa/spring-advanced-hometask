@@ -2,34 +2,52 @@ package ua.epam.spring.hometask.domain;
 
 import org.hibernate.annotations.Proxy;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * @author Yuriy_Tkach and Sergei Malgin
  */
 @Entity
 @Proxy(lazy = false)
+//@XmlRootElement
 public class Event extends DomainObject {
 
-//    @NaturalId
     @Column(nullable = false)
+    @XmlElement(required = true)
     private String name;
+//    TODO @NaturalId
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @XmlElement(required = false)
     private Set<LocalDateTime> airDates;
-    // TODO
-//    private SortedSet<LocalDateTime> airDates;
+//    TODO private SortedSet<LocalDateTime> airDates;
 
-    // base price, users can have discount
+    /**
+     * base price, users can have discount
+      */
+    @XmlElement(required = false)
     private double ticketPrice;
 
     @Enumerated(EnumType.STRING)
+    @XmlElement(required = false)
     private EventRating rating;
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ManyToMany(fetch = FetchType.EAGER)
     private Map<LocalDateTime, Auditorium> auditoriums;
 
