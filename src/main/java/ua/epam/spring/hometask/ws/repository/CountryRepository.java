@@ -2,8 +2,8 @@ package ua.epam.spring.hometask.ws.repository;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-import ua.epam.spring.hometask.domain.sample.localhost._8080.ws.countries.Country;
-import ua.epam.spring.hometask.domain.sample.localhost._8080.ws.countries.Currency;
+import ua.epam.spring.hometask.domain.sample.Country;
+import ua.epam.spring.hometask.domain.sample.Currency;
 
 import java.util.HashMap;
 import java.util.Map;
