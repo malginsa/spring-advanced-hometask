@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.epam.spring.hometask.domain.Event;
@@ -25,7 +26,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/book")
+@RequestMapping("/booking")
 public class BookingController {
 
     @Autowired
@@ -40,14 +41,9 @@ public class BookingController {
     @Autowired
     private AuditoriumService auditoriumService;
 
-    @RequestMapping("/main")
-    public ModelAndView main() {
-        return new ModelAndView("bookForm");
-    }
-
-    // sample: http://localhost:8080/book/doBookTickets?userId=1&eventName=Mud&localDateTime=2017-01-11.18:00&seat=7&seat=8
-    @RequestMapping("/doBookTickets")
-    public ModelAndView doBookTickets(
+    // sample: http://localhost:8080/booking?userId=1&eventName=Mud&localDateTime=2017-01-11.18:00&seat=7&seat=8
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView doBooking(
             @RequestParam Long userId,
             @RequestParam String eventName,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm")
@@ -83,8 +79,9 @@ public class BookingController {
         return mav;
     }
 
-    // sample: http://localhost:8080/book/getTickets?eventName=Mud&localDateTime=2017-01-11.18:00
-    @RequestMapping("/getTickets")
+    // sample: http://localhost:8080/booking?eventName=Mud&localDateTime=2017-01-11.18:00
+    @RequestMapping(method = RequestMethod.GET,
+                    headers = "Accept!=application/pdf")
     public ModelAndView getTickets(
             @RequestParam String eventName,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm")
@@ -113,7 +110,10 @@ public class BookingController {
     }
 
     // It returns the same result as above method except only in PDF document
-    @RequestMapping(value = "/getTicketsInPdf", headers="Accept=application/pdf")
+    @RequestMapping(method = RequestMethod.GET,
+//                    value = "/getTicketsInPdf",
+                    headers = "Accept=application/pdf",
+                    produces = "application/pdf")
     public ModelAndView getTicketsInPdf(
             @ModelAttribute("model") ModelMap model,
             @RequestParam String eventName,

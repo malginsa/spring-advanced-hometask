@@ -16,8 +16,7 @@
 <a href="http://localhost:8080/loggedUserInfo">Logged user info</a><br>
 <a href="http://localhost:8080/populateTestData">Populate Test Data</a><br>
 <hr>
-<a href="http://localhost:8080/book/main">Do book tickets</a><br>
-<hr>
+<a href="http://localhost:8080/bookForm">Do book tickets</a><br>
 <a href="http://localhost:8080/getTicketsForm">Get booked tickets</a><br>
 <a href="http://localhost:8080/getTicketsInPdfForm">Get booked tickets in PDF</a><br>
 <hr>

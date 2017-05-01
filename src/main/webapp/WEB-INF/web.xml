@@ -22,7 +22,7 @@
     </filter>
     <filter-mapping>
         <filter-name>etagFilter</filter-name>
-        <servlet-name>dispatcher</servlet-name>
+        <servlet-name>mvc-dispatcher</servlet-name>
     </filter-mapping>
 
 </web-app>

@@ -11,7 +11,7 @@
 <a href="http://localhost:8080/mainMenu">Main Page</a><br>
 <hr>
 <label>Please, enter parameters:</label>
-<form action="/book/getTickets" method="get">
+<form action="/booking" method="get">
     <p>Event Name <input name="eventName"></p>
     <p>Date and Time <input name="localDateTime"></p>
     <p><input type="submit"></p>

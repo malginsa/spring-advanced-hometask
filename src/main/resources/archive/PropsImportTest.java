@@ -1,9 +1,7 @@
 package archive;
 
 import ua.epam.spring.hometask.domain.User;
-import ua.epam.spring.hometask.domain.UserRole;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -47,6 +45,8 @@ public class PropsImportTest {
         suffixToMethod.put("email", User::setEmail);
 
         String s = "ROLE_REGISTERED_USER,ROLE_BOOKING_MANAGER";
+
+        // TODO
 //        Arrays.stream(s.split(","))
 //                .map(UserRole::valueOf)
 //                .forEach();

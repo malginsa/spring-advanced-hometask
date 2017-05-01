@@ -12,7 +12,7 @@
 <br>
 <hr>
 <label>Please, enter parameters for booking:</label>
-<form action="/book/doBookTickets" method="get">
+<form action="/booking" method="post">
     <p>User Id <input name="userId"></p>
     <p>Event Name <input name="eventName"></p>
     <p>Date and Time <input name="localDateTime"></p>

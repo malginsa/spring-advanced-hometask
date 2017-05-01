@@ -1,6 +1,6 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-        xmlns:tns="http://spring.epam.ua/hometask/domain/sample"
-        targetNamespace="http://spring.epam.ua/hometask/domain/sample"
+        xmlns:tns="http://localhost:8080/ws"
+        targetNamespace="http://localhost:8080/ws"
         elementFormDefault="qualified">
 
     <element name="getCountryRequest">

@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-public class JpaConfig {
+public class JpaConfigH2 {
 
     @Bean
     public DataSource dataSource() {
@@ -53,6 +53,7 @@ public class JpaConfig {
         Properties properties = new Properties();
         properties.setProperty("hibernate.show_sql", "false");
         properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        // TODO add correct dialect
 //        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("hibernate.c3p0.min_size", "5");
         properties.setProperty("hibernate.c3p0.max_size", "20");

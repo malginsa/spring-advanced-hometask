@@ -70,6 +70,11 @@ public class MainController {
         return "mainMenu";
     }
 
+    @RequestMapping("/bookForm")
+    public String bookForm() {
+        return "bookForm";
+    }
+
     @RequestMapping("/getTicketsForm")
     public String getTicketsForm() {
         return "getTicketsForm";
@@ -109,8 +114,10 @@ public class MainController {
                 .stream()
                 .collect(Collectors.toList())
                 .toString();
+        String username = principal.getUsername();
+        Long id = userService.getUsersByName(username).iterator().next().getId();
         mav.addObject("message",
-                "username: " + principal.getUsername() + "  auth: " + auth);
+                      "id: " + id + "  username: " + username + "  auth: " + auth);
         return mav;
     }
 
