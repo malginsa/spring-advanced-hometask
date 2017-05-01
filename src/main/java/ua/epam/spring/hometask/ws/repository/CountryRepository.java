@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 
+// Example from Reference Manual
 @Component
 public class CountryRepository {
     private static final Map<String, Country> countries = new HashMap<>();

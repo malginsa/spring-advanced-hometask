@@ -2,12 +2,14 @@ package ua.epam.spring.hometask.mvc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
@@ -24,6 +26,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/booking")
@@ -81,7 +84,7 @@ public class BookingController {
 
     // sample: http://localhost:8080/booking?eventName=Mud&localDateTime=2017-01-11.18:00
     @RequestMapping(method = RequestMethod.GET,
-                    headers = "Accept!=application/pdf")
+                    headers = "Accept!=" + MediaType.APPLICATION_PDF_VALUE)
     public ModelAndView getTickets(
             @RequestParam String eventName,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm")
@@ -109,31 +112,52 @@ public class BookingController {
         return mav;
     }
 
-    // It returns the same result as above method except only in PDF document
+    // This version user custom ViewResolver
+//    @RequestMapping(method = RequestMethod.GET,
+//                    headers = "Accept=" + MediaType.APPLICATION_PDF_VALUE,
+//                    produces = MediaType.APPLICATION_PDF_VALUE)
+//    public ModelAndView getTicketsInPdf(
+//            @ModelAttribute("model") ModelMap model,
+//            @RequestParam String eventName,
+//            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm")
+//                    LocalDateTime localDateTime)
+//            throws Exception {
+//        Optional<Event> eventOptional = eventService.getByName(eventName);
+//        if (!eventOptional.isPresent()) {
+//            throw new Exception("Non-existing event");
+//        }
+//        Collection<Ticket> tickets = bookingService.getPurchasedTicketsForEvent(
+//                eventOptional.get(), localDateTime);
+//        ModelAndView mav;
+//        if (tickets.size() > 0) {
+//            mav = new ModelAndView("pdf", "tickets", tickets);
+//        } else {
+//            mav = new ModelAndView("simplePage");
+//            mav.addObject("title", "No booked tickets");
+//            mav.addObject("message", "");
+//        }
+//        return mav;
+//    }
+
+    // this version uses customMessageConverter
+    @ResponseBody
     @RequestMapping(method = RequestMethod.GET,
-//                    value = "/getTicketsInPdf",
-                    headers = "Accept=application/pdf",
-                    produces = "application/pdf")
-    public ModelAndView getTicketsInPdf(
+                    headers = "Accept=" + MediaType.APPLICATION_PDF_VALUE,
+                    produces = MediaType.APPLICATION_PDF_VALUE)
+    public Collection<Ticket> getTicketInPdf(
             @ModelAttribute("model") ModelMap model,
             @RequestParam String eventName,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd.HH:mm")
-                    LocalDateTime localDateTime)
-            throws Exception {
+            LocalDateTime localDateTime,
+            HttpServletResponse response) throws Exception {
+
+        response.setHeader("Content-Type", MediaType.APPLICATION_PDF_VALUE);
         Optional<Event> eventOptional = eventService.getByName(eventName);
         if (!eventOptional.isPresent()) {
             throw new Exception("Non-existing event");
         }
         Collection<Ticket> tickets = bookingService.getPurchasedTicketsForEvent(
                 eventOptional.get(), localDateTime);
-        ModelAndView mav;
-        if (tickets.size() > 0) {
-            mav = new ModelAndView("pdf", "tickets", tickets);
-        } else {
-            mav = new ModelAndView("simplePage");
-            mav.addObject("title", "No booked tickets");
-            mav.addObject("message", "");
-        }
-        return mav;
+        return tickets;
     }
 }

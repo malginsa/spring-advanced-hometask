@@ -29,8 +29,7 @@ public class CountryEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
     @ResponsePayload
-    public GetCountryResponse getCountry(@RequestPayload
-                                             GetCountryRequest request) {
+    public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request) {
         LOG.info("CountryEndpoint.getCountry() is invoked");
         GetCountryResponse response = new GetCountryResponse();
         Country country = countryRepository.findCountry(request.getName());
