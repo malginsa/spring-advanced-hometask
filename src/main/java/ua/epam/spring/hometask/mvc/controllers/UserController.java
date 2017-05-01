@@ -5,9 +5,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ua.epam.spring.hometask.domain.User;
@@ -22,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/user")
@@ -31,6 +35,49 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @ResponseBody
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable Long id, HttpServletResponse response) {
+        User user = userService.getById(id);
+        if (null == user) {
+            response.setStatus(404);
+        } else {
+            response.setStatus(201);
+        }
+        return user;
+    }
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST)
+    public User create(@RequestBody final User user) {
+        User saved = userService.save(user);
+        return saved;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ModelAndView delete(@PathVariable Long id, HttpServletResponse response) {
+        User user = userService.getById(id);
+        ModelAndView mav = new ModelAndView("simplePage");
+        if (null == user) {
+            response.setStatus(404);
+            mav.addObject("title", "No users with this eMail");
+            mav.addObject("message", "");
+        } else {
+            userService.remove(user); // TODO return boolean
+            mav.addObject("title", "User founded, user is obviously removed. Get it by id to check");
+            mav.addObject("message", "");
+            response.setStatus(202);
+        }
+        return mav;
+    }
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.PUT)
+    public User update(@RequestBody final User user) {
+            User saved = userService.save(user);
+            return saved;
+    }
 
     // sample: http://localhost:8080/user/getByEmail?email=budd@eecs.oregonstate.edu
     @RequestMapping("/getByEmail")

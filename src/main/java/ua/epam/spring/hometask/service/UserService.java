@@ -1,11 +1,10 @@
 package ua.epam.spring.hometask.service;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import ua.epam.spring.hometask.domain.User;
 
 import java.util.Collection;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Yuriy_Tkach
@@ -30,4 +29,5 @@ public interface UserService extends AbstractDomainObjectService<User> {
      */
     public Collection<User> getUsersByName(@Nonnull String firstName);
 
+    // TODO add method update to UserService
 }
